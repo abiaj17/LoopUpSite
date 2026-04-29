@@ -1,0 +1,572 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LoopUp | Private Family and Friends Group App</title>
+    <meta
+      name="description"
+      content="LoopUp is a private group app for families and friends to Plan, Play, and Share in one place. Stay connected with shared events, mini-games, and memory updates."
+    />
+    <meta
+      name="keywords"
+      content="LoopUp app, family app, private group app, friends planning app, shared calendar app, mini games, memory wall"
+    />
+    <meta name="author" content="LoopUp" />
+    <meta property="og:title" content="LoopUp | Plan, Play, Share" />
+    <meta
+      property="og:description"
+      content="One private space for families and close friends to coordinate plans, play together, and share memories."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://loopup.app/" />
+    <meta property="og:image" content="https://loopup.app/og-image.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="LoopUp | Plan, Play, Share" />
+    <meta
+      name="twitter:description"
+      content="Private group app for families and friends to coordinate and stay connected."
+    />
+    <link rel="canonical" href="https://loopup.app/" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          borderRadius: {
+            none: "0",
+            sm: "0.125rem",
+            DEFAULT: "1rem",
+            md: "1rem",
+            lg: "1rem",
+            xl: "1rem",
+            "2xl": "1rem",
+            full: "9999px"
+          },
+          extend: {
+            fontFamily: {
+              sans: ["SF Pro Display", "SF Pro Text", "Inter", "system-ui", "sans-serif"]
+            },
+            colors: {
+              ink: "#000000",
+              paper: "#ffffff",
+              system: "#f5f5f7",
+              secondary: "#000000",
+              line: "#d2d2d7",
+              accent: "#ff2d55"
+            }
+          }
+        }
+      };
+    </script>
+    <style>
+      :root {
+        --spring-ease: cubic-bezier(0.22, 1, 0.36, 1);
+        --ui-fast: 220ms;
+        --ui-med: 520ms;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+
+      .glass {
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(140deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.34) 48%, rgba(255, 196, 228, 0.2) 100%);
+        border: 1px solid rgba(255, 255, 255, 0.62);
+        backdrop-filter: blur(34px) saturate(180%) brightness(1.08);
+        -webkit-backdrop-filter: blur(34px) saturate(180%) brightness(1.08);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.96),
+          inset 0 -1px 0 rgba(255, 255, 255, 0.36),
+          0 20px 45px rgba(255, 45, 85, 0.16),
+          0 35px 90px rgba(23, 29, 48, 0.16);
+      }
+      .glass::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(circle at 18% 12%, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0) 38%),
+          radial-gradient(circle at 82% 82%, rgba(255, 140, 190, 0.32) 0%, rgba(255, 140, 190, 0) 44%),
+          linear-gradient(120deg, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0.42) 48%, rgba(255, 255, 255, 0) 76%);
+        background-size: 100% 100%, 100% 100%, 240% 240%;
+        animation: sheenMove 7s linear infinite;
+        pointer-events: none;
+      }
+      .glass::after {
+        content: "";
+        position: absolute;
+        inset: 1px;
+        border-radius: inherit;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
+        mix-blend-mode: screen;
+        pointer-events: none;
+      }
+
+      .glass-soft {
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.86) 0%, rgba(255, 196, 223, 0.58) 100%);
+        border: 1px solid rgba(255, 128, 176, 0.56);
+        backdrop-filter: blur(20px) saturate(155%);
+        -webkit-backdrop-filter: blur(20px) saturate(155%);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 12px 28px rgba(255, 45, 85, 0.2);
+      }
+      .emboss {
+        border: 1px solid rgba(210, 215, 225, 0.7);
+        background: rgba(255, 255, 255, 0.35);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95), 0 20px 45px rgba(120, 130, 160, 0.12);
+      }
+      .phone-float {
+        position: relative;
+        transform: translateY(0) rotate(-6deg);
+        animation: phoneRise 5.5s ease-in-out infinite alternate;
+      }
+      .phone-float::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: -1.2rem;
+        width: 74%;
+        height: 1.2rem;
+        transform: translateX(-50%);
+        border-radius: 9999px;
+        background: radial-gradient(ellipse at center, rgba(24, 32, 58, 0.24) 0%, rgba(24, 32, 58, 0.06) 58%, rgba(24, 32, 58, 0) 100%);
+        filter: blur(6px);
+        animation: phoneShadow 5.5s ease-in-out infinite alternate;
+      }
+      @keyframes phoneRise {
+        from { transform: translateY(10px) rotate(-4deg); }
+        to { transform: translateY(-12px) rotate(-2deg); }
+      }
+      @keyframes phoneShadow {
+        from { opacity: 0.42; transform: translateX(-50%) scale(0.95); }
+        to { opacity: 0.24; transform: translateX(-50%) scale(1.08); }
+      }
+      .phone-shell {
+        position: relative;
+        width: min(100%, 33rem);
+        margin-inline: auto;
+        border-radius: 2rem;
+        border: 1px solid rgba(35, 44, 70, 0.75);
+        background: linear-gradient(170deg, rgba(18, 24, 38, 0.97) 0%, rgba(12, 16, 28, 0.98) 100%);
+        box-shadow: 0 32px 60px rgba(17, 22, 36, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        padding: 0.45rem;
+      }
+      .phone-screen {
+        border-radius: 1.6rem;
+        overflow: hidden;
+        background: radial-gradient(circle at 16% 18%, #ffb6d2 0%, #ff5ea4 34%, #ff3f89 74%, #ff8fc3 100%);
+        min-height: 18.2rem;
+        position: relative;
+      }
+      .phone-notch {
+        position: absolute;
+        top: 0.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 18%;
+        height: 0.7rem;
+        border-radius: 999px;
+        background: rgba(10, 10, 14, 0.88);
+      }
+      .demo-chip {
+        background: rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.45);
+        backdrop-filter: blur(12px);
+      }
+
+      .lift {
+        transform: perspective(1100px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translate3d(0, 0, 0);
+        will-change: transform, box-shadow;
+        backface-visibility: hidden;
+        transition: transform var(--ui-med) var(--spring-ease), box-shadow var(--ui-med) var(--spring-ease), border-color var(--ui-med) var(--spring-ease);
+      }
+
+      .lift:hover {
+        transform: perspective(1100px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translate3d(0, -8px, 0) scale(1.015);
+        box-shadow: 0 26px 62px rgba(0, 0, 0, 0.14);
+        border-color: rgba(255, 45, 85, 0.35);
+      }
+      @keyframes sheenMove {
+        0% { background-position: 0% 0%, 0% 0%, 0% 50%; }
+        100% { background-position: 0% 0%, 0% 0%, 100% 50%; }
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translate3d(0, 20px, 0);
+        will-change: transform, opacity;
+        transition: transform 950ms var(--spring-ease), opacity 950ms var(--spring-ease);
+        transition-delay: var(--reveal-delay, 0ms);
+      }
+
+      .reveal.in {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+      .skip-link {
+        position: absolute;
+        left: 1rem;
+        top: -3rem;
+        z-index: 50;
+        border-radius: 9999px;
+        background: #ff2d55;
+        color: #fff;
+        padding: 0.5rem 0.9rem;
+        font-size: 0.875rem;
+        transition: top 250ms ease;
+      }
+      .skip-link:focus {
+        top: 1rem;
+      }
+      a:focus-visible {
+        outline: 2px solid rgba(255, 45, 85, 0.75);
+        outline-offset: 3px;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .lift,
+        .reveal,
+        .phone-float,
+        .phone-float::after {
+          transition: none !important;
+          animation: none !important;
+        }
+        .glass::before {
+          animation: none !important;
+        }
+        .lift:hover {
+          transform: none;
+        }
+      }
+
+      .logo-wordmark {
+        font-size: 1.85rem;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        line-height: 1;
+        background: linear-gradient(135deg, #ff2d55 0%, #ff7fb2 100%);
+        color: transparent;
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-stroke: 1px rgba(255, 45, 85, 0.32);
+        text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7), 0 10px 24px rgba(255, 45, 85, 0.18);
+      }
+      .mesh-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background-image: radial-gradient(rgba(255, 255, 255, 0.2) 0.7px, transparent 0.7px);
+        background-size: 3px 3px;
+        opacity: 0.18;
+        mix-blend-mode: soft-light;
+      }
+      .cta-primary {
+        position: relative;
+      }
+      .cta-primary::after {
+        content: "";
+        position: absolute;
+        inset: -2px;
+        z-index: -1;
+        border-radius: inherit;
+        background: radial-gradient(circle at 30% 30%, rgba(255, 149, 193, 0.5), rgba(255, 45, 85, 0));
+        opacity: 0;
+        transition: opacity var(--ui-fast) ease;
+      }
+      .cta-primary:hover::after {
+        opacity: 1;
+      }
+      .policy-backdrop {
+        position: fixed;
+        inset: 0;
+        z-index: 60;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        background: rgba(9, 10, 14, 0.58);
+        backdrop-filter: blur(6px);
+      }
+      .policy-backdrop.active {
+        display: flex;
+      }
+      .policy-card {
+        width: min(100%, 34rem);
+      }
+      html.low-motion .glass {
+        backdrop-filter: blur(22px) saturate(150%) brightness(1.02);
+        -webkit-backdrop-filter: blur(22px) saturate(150%) brightness(1.02);
+      }
+      html.low-motion .glass::before {
+        animation-duration: 14s;
+        opacity: 0.72;
+      }
+      html.low-motion .mesh-overlay {
+        opacity: 0.1;
+      }
+      html.low-motion .lift,
+      html.low-motion .reveal {
+        transition-duration: 360ms !important;
+      }
+    </style>
+  </head>
+  <body class="bg-gradient-to-b from-[#f2f3f7] via-[#f5f6fa] to-[#eef0f5] font-sans text-ink antialiased">
+    <a href="#main-content" class="skip-link">Skip to content</a>
+    <div class="mesh-overlay"></div>
+    <div class="pointer-events-none fixed inset-x-0 top-0 z-0 mx-auto h-80 max-w-6xl bg-gradient-to-b from-white/65 via-white/20 to-transparent blur-3xl"></div>
+    <div class="pointer-events-none fixed -left-24 top-20 z-0 h-80 w-80 rounded-full bg-pink-300/30 blur-3xl"></div>
+    <div class="pointer-events-none fixed -right-24 top-44 z-0 h-96 w-96 rounded-full bg-rose-300/30 blur-3xl"></div>
+    <header class="glass sticky top-0 z-20 border-b border-line bg-white/70 backdrop-blur-md">
+      <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+        <a href="./index.html" class="logo-wordmark">LoopUp</a>
+        <nav class="flex items-center gap-6 text-sm text-secondary">
+          <a href="./index.html" aria-current="page" class="haptic-tap rounded-full px-3 py-1.5 text-ink transition hover:bg-white">Home</a>
+          <a href="./updates.html" class="haptic-tap rounded-full px-3 py-1.5 transition hover:bg-white hover:text-ink">Updates</a>
+          <a href="./about.html" class="haptic-tap rounded-full px-3 py-1.5 transition hover:bg-white hover:text-ink">About</a>
+          <a href="./contact.html" class="haptic-tap rounded-full px-3 py-1.5 transition hover:bg-white hover:text-ink">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main-content" class="relative z-10">
+      <section class="mx-auto grid min-h-[72vh] max-w-6xl items-center gap-10 px-6 py-28 md:min-h-[78vh] md:grid-cols-2 md:py-36 reveal">
+        <div>
+          <p class="glass-soft mb-6 inline-flex rounded-full px-4 py-2 text-xs font-medium text-secondary">
+            Private group app for families and friends
+          </p>
+          <h1 class="max-w-4xl text-5xl font-bold tracking-tight md:text-7xl">
+            Plan together, play together, and share what matters.
+          </h1>
+          <p class="mt-8 max-w-3xl text-xl text-secondary">
+            LoopUp combines planning, mini-games, and shared memories in one simple space designed for real groups who want to stay connected.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-4">
+            <a href="./updates.html" class="haptic-tap cta-primary lift rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90">
+              See Product Updates
+            </a>
+            <a href="./about.html" class="haptic-tap glass-soft lift rounded-full px-6 py-3 text-sm font-semibold text-ink shadow-sm transition hover:bg-pink-50/80">
+              Learn About LoopUp
+            </a>
+          </div>
+        </div>
+        <aside class="emboss relative rounded-[2rem] p-6 md:p-8">
+          <div class="absolute -left-10 -top-10 h-32 w-32 rounded-[2rem] border border-white/70"></div>
+          <div class="phone-float">
+            <div class="phone-shell">
+              <div class="phone-screen p-5 md:p-6">
+                <div class="phone-notch"></div>
+                <p class="mt-4 text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-white/80">LoopUp Live Demo</p>
+                <div class="mt-3 grid grid-cols-[1.2fr_0.8fr] gap-4">
+                  <div>
+                    <h3 class="text-2xl font-semibold tracking-tight text-white">Family Weekend Plan</h3>
+                    <div class="mt-4 space-y-2.5">
+                      <div class="demo-chip rounded-xl p-2.5 text-xs text-white">Saturday 10:00 AM - Brunch RSVP: 5/6</div>
+                      <div class="demo-chip rounded-xl p-2.5 text-xs text-white">Photo Challenge is live in Play mode</div>
+                      <div class="demo-chip rounded-xl p-2.5 text-xs text-white">3 new memory posts from your group</div>
+                    </div>
+                  </div>
+                  <div class="glass-soft rounded-2xl p-3">
+                    <p class="text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-secondary">Today</p>
+                    <p class="mt-1 text-2xl font-semibold tracking-tight text-ink">8:30</p>
+                    <p class="text-xs text-secondary">Family sync in 30m</p>
+                    <div class="mt-3 space-y-2">
+                      <div class="rounded-lg bg-white/70 px-2 py-1 text-[0.68rem] text-secondary">Plan</div>
+                      <div class="rounded-lg bg-white/70 px-2 py-1 text-[0.68rem] text-secondary">Play</div>
+                      <div class="rounded-lg bg-white/70 px-2 py-1 text-[0.68rem] text-secondary">Share</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-3 grid grid-cols-3 gap-2 text-center text-[0.68rem] font-medium text-white/90">
+                  <div class="demo-chip rounded-lg py-1.5">Plan</div>
+                  <div class="demo-chip rounded-lg py-1.5">Play</div>
+                  <div class="demo-chip rounded-lg py-1.5">Share</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </section>
+      <section class="mx-auto max-w-6xl px-6 pb-6">
+        <div class="emboss h-px w-full"></div>
+      </section>
+
+      <section class="mx-auto max-w-6xl px-6 py-16 reveal">
+        <div class="glass rounded-2xl p-7 md:p-10">
+          <p class="text-xs font-semibold uppercase tracking-[0.18em] text-secondary">Get The App</p>
+          <h2 class="mt-3 max-w-3xl text-3xl font-bold tracking-tight md:text-4xl">Download LoopUp on iOS and Android</h2>
+          <p class="mt-4 max-w-2xl text-sm md:text-base text-secondary">
+            Join families and close friends using LoopUp to plan events, play daily prompts, and save shared memories in one private space.
+          </p>
+          <div class="mt-7 grid gap-4 md:grid-cols-2">
+            <a href="#" class="haptic-tap glass-soft lift rounded-2xl px-5 py-4">
+              <p class="text-xs uppercase tracking-[0.16em] text-secondary">Apple</p>
+              <p class="mt-1 text-lg font-semibold tracking-tight text-ink">Download on the App Store</p>
+              <p class="mt-1 text-xs text-secondary">iPhone and iPad supported</p>
+            </a>
+            <a href="#" class="haptic-tap glass-soft lift rounded-2xl px-5 py-4">
+              <p class="text-xs uppercase tracking-[0.16em] text-secondary">Android</p>
+              <p class="mt-1 text-lg font-semibold tracking-tight text-ink">Get it on Google Play</p>
+              <p class="mt-1 text-xs text-secondary">Phones and tablets supported</p>
+            </a>
+          </div>
+          <div class="mt-5 flex flex-wrap items-center gap-3 text-xs text-secondary">
+            <span class="glass-soft rounded-full px-3 py-1.5">Private groups only</span>
+            <span class="glass-soft rounded-full px-3 py-1.5">Plan - Play - Share in one app</span>
+            <span class="glass-soft rounded-full px-3 py-1.5">Weekly updates and new prompts</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="mx-auto grid max-w-6xl gap-6 px-6 py-24 md:grid-cols-3 reveal">
+        <article class="glass lift rounded-2xl p-8 shadow-sm">
+          <h2 class="text-xl font-bold tracking-tight">Plan</h2>
+          <p class="mt-4 text-sm text-secondary">
+            Shared events, RSVP, reminders, and recurring plans for families and close groups.
+          </p>
+        </article>
+        <article class="glass lift rounded-2xl p-8 shadow-sm">
+          <h2 class="text-xl font-bold tracking-tight">Play</h2>
+          <p class="mt-4 text-sm text-secondary">
+            Daily prompts and mini-games that create fun, lightweight reasons to return weekly.
+          </p>
+        </article>
+        <article class="glass lift rounded-2xl p-8 shadow-sm">
+          <h2 class="text-xl font-bold tracking-tight">Share</h2>
+          <p class="mt-4 text-sm text-secondary">
+            Memory wall for photos, voice notes, and updates that keep moments easy to revisit.
+          </p>
+        </article>
+      </section>
+
+      <section class="reveal px-6 py-20">
+        <div class="glass mx-auto max-w-6xl rounded-2xl px-6 py-24">
+          <h2 class="text-3xl font-bold tracking-tight">What is happening now</h2>
+          <p class="mt-4 max-w-2xl text-secondary">
+            We publish feature releases, roadmap progress, and product notes so your community always knows what is new.
+          </p>
+          <a href="./updates.html" class="haptic-tap lift mt-8 inline-flex rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90">
+            Visit Updates
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="mx-auto flex max-w-6xl flex-col gap-4 px-6 py-10 text-sm text-secondary md:flex-row md:items-center md:justify-between">
+      <p>© <span id="year"></span> LoopUp. All rights reserved.</p>
+      <div class="flex gap-4">
+        <a href="./updates.html" class="haptic-tap hover:text-ink">Updates</a>
+        <a href="./about.html" class="haptic-tap hover:text-ink">About</a>
+        <a href="./contact.html" class="haptic-tap hover:text-ink">Contact</a>
+        <a href="./privacy.html" class="haptic-tap hover:text-ink">Privacy</a>
+      </div>
+    </footer>
+    <div id="policy-consent" class="policy-backdrop" role="dialog" aria-modal="true" aria-labelledby="policy-title">
+      <div class="policy-card glass rounded-2xl p-6">
+        <p class="text-xs font-semibold uppercase tracking-[0.16em] text-secondary">Privacy Required</p>
+        <h2 id="policy-title" class="mt-2 text-2xl font-bold tracking-tight text-ink">Before you continue</h2>
+        <p class="mt-3 text-sm text-secondary">
+          Please review and accept the LoopUp Privacy Policy to continue using this website experience.
+        </p>
+        <div class="mt-5 flex flex-wrap gap-3">
+          <a href="./privacy.html" class="haptic-tap glass-soft rounded-full px-4 py-2 text-sm font-semibold text-ink">View Privacy Policy</a>
+          <button id="accept-policy" type="button" class="haptic-tap rounded-full bg-accent px-4 py-2 text-sm font-semibold text-white">
+            I Accept
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const isLowPowerDevice =
+        (typeof navigator.hardwareConcurrency === "number" && navigator.hardwareConcurrency <= 4) ||
+        (typeof navigator.deviceMemory === "number" && navigator.deviceMemory <= 4);
+      if (isLowPowerDevice) {
+        document.documentElement.classList.add("low-motion");
+      }
+      document.getElementById("year").textContent = new Date().getFullYear();
+      const revealElements = document.querySelectorAll(".reveal");
+      revealElements.forEach((element, index) => {
+        element.style.setProperty("--reveal-delay", `${index * 90}ms`);
+      });
+      if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("in");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.15, rootMargin: "0px 0px -10% 0px" }
+        );
+        revealElements.forEach((element) => observer.observe(element));
+      } else {
+        revealElements.forEach((element) => element.classList.add("in"));
+      }
+      const prefersFinePointer = window.matchMedia("(pointer: fine)").matches;
+      if (prefersFinePointer && !isLowPowerDevice) {
+        const liftElements = document.querySelectorAll(".lift");
+        liftElements.forEach((element) => {
+          let rafId = null;
+          let targetX = 0;
+          let targetY = 0;
+          element.addEventListener("pointermove", (event) => {
+            const rect = element.getBoundingClientRect();
+            targetX = (event.clientX - rect.left) / rect.width - 0.5;
+            targetY = (event.clientY - rect.top) / rect.height - 0.5;
+            if (rafId) return;
+            rafId = requestAnimationFrame(() => {
+              element.style.setProperty("--ry", `${targetX * 7}deg`);
+              element.style.setProperty("--rx", `${-targetY * 7}deg`);
+              rafId = null;
+            });
+          });
+          element.addEventListener("pointerleave", () => {
+            if (rafId) cancelAnimationFrame(rafId);
+            rafId = null;
+            element.style.setProperty("--ry", "0deg");
+            element.style.setProperty("--rx", "0deg");
+          });
+        });
+      }
+      const canUseHaptics = "vibrate" in navigator && window.matchMedia("(pointer: coarse)").matches;
+      const triggerHapticTap = (pattern = [8]) => {
+        if (!canUseHaptics) return;
+        navigator.vibrate(pattern);
+      };
+      document.querySelectorAll(".haptic-tap").forEach((element) => {
+        element.addEventListener("pointerup", () => triggerHapticTap([8]));
+        element.addEventListener("keydown", (event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            triggerHapticTap([6]);
+          }
+        });
+      });
+      const policyStorageKey = "loopup_policy_accepted_v1";
+      const policyConsent = document.getElementById("policy-consent");
+      const acceptPolicyButton = document.getElementById("accept-policy");
+      const hasAcceptedPolicy = localStorage.getItem(policyStorageKey) === "true";
+      if (!hasAcceptedPolicy) {
+        policyConsent.classList.add("active");
+        document.body.style.overflow = "hidden";
+      }
+      acceptPolicyButton?.addEventListener("click", () => {
+        localStorage.setItem(policyStorageKey, "true");
+        policyConsent.classList.remove("active");
+        document.body.style.overflow = "";
+        triggerHapticTap([10]);
+      });
+
+    </script>
+  </body>
+</html>

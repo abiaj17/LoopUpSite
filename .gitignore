@@ -1,0 +1,18 @@
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Editors / IDE (optional — uncomment if you prefer not to commit Cursor rules)
+# .cursor/
+
+# Logs & temp
+*.log
+npm-debug.log*
+*.tmp
+*.temp
+
+# If you add Node tooling later
+node_modules/
+dist/
+.cache/
