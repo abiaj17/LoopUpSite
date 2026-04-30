@@ -1,290 +1,401 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LoopUp | Private Family and Friends Group App</title>
-    <meta name="description" content="LoopUp is a private group app for families and friends to Plan, Play, and Share in one place." />
-    <meta name="keywords" content="LoopUp app, family app, private group app, friends planning app, shared calendar app, mini games, memory wall" />
-    <meta name="author" content="LoopUp" />
-    <meta property="og:title" content="LoopUp | Plan, Play, Share" />
-    <meta property="og:description" content="One private space for families and close friends to coordinate plans, play together, and share memories." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://loopup.app/" />
-    <meta property="og:image" content="https://loopup.app/og-image.jpg" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="LoopUp | Plan, Play, Share" />
-    <meta name="twitter:description" content="Private group app for families and friends to coordinate and stay connected." />
-    <link rel="canonical" href="https://loopup.app/" />
-    <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Nunito:wght@800;900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./assets/site.css" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          borderRadius: { none:"0",sm:"2px",DEFAULT:"12px",md:"12px",lg:"16px",xl:"20px","2xl":"24px",full:"9999px" },
-          extend: {
-            fontFamily: { sans:["SF Pro Display","SF Pro Text","Inter","system-ui","sans-serif"] },
-            colors: { ink:"#1d1d1f",secondary:"#6e6e73",line:"#d2d2d7",system:"#f5f5f7",paper:"#ffffff",accent:"#ff5c47" }
-          }
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LoopUp | Your Group's Home Base</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Be+Vietnam+Pro:wght@400;500;600&amp;family=PP+Neue+Montreal+Mono:wght@400;500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        @font-face {
+            font-family: 'PP Neue Montreal Mono';
+            src: local('Courier New'); /* Fallback for the mono feel */
         }
-      };
+        
+        body {
+            background-color: #010120;
+            overflow-x: hidden;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-radius: 24px;
+        }
+
+        .glass-card:hover {
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            transform: translateY(-4px) scale(1.02);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .pastel-gradient-bg {
+            background: linear-gradient(135deg, #010120 0%, #1a1a4a 50%, #010120 100%);
+            position: relative;
+        }
+
+        .pastel-gradient-bg::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            left: -10%;
+            width: 50%;
+            height: 50%;
+            background: radial-gradient(circle, rgba(195, 195, 236, 0.15) 0%, transparent 70%);
+            filter: blur(80px);
+            z-index: 0;
+        }
+
+        .pastel-gradient-bg::after {
+            content: '';
+            position: absolute;
+            bottom: -20%;
+            right: -10%;
+            width: 50%;
+            height: 50%;
+            background: radial-gradient(circle, rgba(210, 187, 255, 0.15) 0%, transparent 70%);
+            filter: blur(80px);
+            z-index: 0;
+        }
+
+        .playable-button {
+            border-top: 1px solid rgba(255, 255, 255, 0.4);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .playable-button:hover {
+            filter: saturate(1.2);
+            transform: scale(1.05);
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .curved-line {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: dash 3s linear forwards;
+        }
+
+        @keyframes dash {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-low": "#1c1b1e",
+                    "primary": "#c3c3ec",
+                    "background": "#131316",
+                    "outline-variant": "#47464e",
+                    "on-tertiary-fixed-variant": "#00513a",
+                    "surface-tint": "#c3c3ec",
+                    "surface-container-highest": "#353437",
+                    "on-secondary-fixed": "#25005a",
+                    "outline": "#919098",
+                    "on-background": "#e5e1e5",
+                    "on-secondary": "#3a1e6f",
+                    "on-primary-fixed": "#171838",
+                    "surface": "#131316",
+                    "on-tertiary": "#003827",
+                    "secondary": "#d2bbff",
+                    "secondary-fixed-dim": "#d2bbff",
+                    "surface-dim": "#131316",
+                    "secondary-container": "#54398a",
+                    "inverse-on-surface": "#313033",
+                    "on-tertiary-fixed": "#002115",
+                    "tertiary": "#8bd6b4",
+                    "tertiary-fixed-dim": "#8bd6b4",
+                    "primary-fixed-dim": "#c3c3ec",
+                    "on-surface": "#e5e1e5",
+                    "surface-bright": "#3a393b",
+                    "surface-container-lowest": "#0e0e10",
+                    "tertiary-container": "#000603",
+                    "primary-fixed": "#e1e0ff",
+                    "error": "#ffb4ab",
+                    "on-error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#513787",
+                    "primary-container": "#010120",
+                    "surface-container": "#201f22",
+                    "error-container": "#93000a",
+                    "on-primary-fixed-variant": "#424466",
+                    "tertiary-fixed": "#a6f2cf",
+                    "inverse-surface": "#e5e1e5",
+                    "on-secondary-container": "#c6aaff",
+                    "on-primary-container": "#737499",
+                    "surface-container-high": "#2a2a2c",
+                    "inverse-primary": "#5a5b7f",
+                    "on-tertiary-container": "#3a8467",
+                    "on-surface-variant": "#c8c5ce",
+                    "surface-variant": "#353437",
+                    "on-error": "#690005",
+                    "on-primary": "#2c2d4e",
+                    "secondary-fixed": "#eaddff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-sm": "12px",
+                    "stack-lg": "40px",
+                    "unit": "8px",
+                    "container-padding": "24px",
+                    "gutter": "20px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Space Grotesk"],
+                    "mono-label": ["PP Neue Montreal Mono"],
+                    "body-md": ["Be Vietnam Pro"],
+                    "display-xl": ["Space Grotesk"]
+            },
+            "fontSize": {
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "mono-label": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "display-xl": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
     </script>
-  </head>
-  <body class="bg-white font-sans text-ink antialiased">
-    <a href="#main-content" class="skip-link">Skip to content</a>
-
-    <!-- ══ HEADER ══ -->
-    <header class="site-nav sticky top-0 z-20">
-      <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-3.5">
-        <a href="./index.html" class="logo-wordmark">LoopUp</a>
-        <nav class="hidden items-center gap-0.5 text-sm md:flex" aria-label="Main">
-          <a href="./index.html" aria-current="page" class="haptic-tap rounded-full px-3.5 py-1.5 font-medium text-ink transition hover:bg-black/[0.05]">Home</a>
-          <a href="./updates.html" class="haptic-tap rounded-full px-3.5 py-1.5 font-medium text-secondary transition hover:bg-black/[0.05] hover:text-ink">Updates</a>
-          <a href="./about.html" class="haptic-tap rounded-full px-3.5 py-1.5 font-medium text-secondary transition hover:bg-black/[0.05] hover:text-ink">About</a>
-          <a href="./contact.html" class="haptic-tap rounded-full px-3.5 py-1.5 font-medium text-secondary transition hover:bg-black/[0.05] hover:text-ink">Contact</a>
-        </nav>
-        <a href="#" class="haptic-tap btn-primary hidden text-sm md:inline-flex">Download</a>
-        <button type="button" class="nav-toggle haptic-tap rounded-xl border border-line p-2" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
-          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-        </button>
-      </div>
-    </header>
-
-    <main id="main-content">
-
-      <!-- ══ HERO ══ -->
-      <section class="overflow-hidden bg-white px-6 pb-0 pt-24 text-center md:pt-32">
-        <!-- Eyebrow -->
-        <div class="reveal mb-6 inline-flex items-center gap-2 rounded-full bg-[#fff0ee] px-4 py-1.5 text-xs font-semibold text-[#ff5c47]">
-          <span class="h-1.5 w-1.5 rounded-full bg-[#ff5c47]"></span>
-          4 games · shared calendar · memory wall — for the 8 people that matter.
-        </div>
-
-        <!-- Headline -->
-        <h1 class="reveal mx-auto max-w-3xl text-[3.25rem] font-extrabold leading-[1.05] tracking-[-0.04em] text-ink md:text-[5.5rem]" style="--reveal-delay: 80ms">
-          The group chat your close ones deserve.
-        </h1>
-
-        <!-- Subtitle -->
-        <p class="reveal mx-auto mt-7 max-w-xl text-lg leading-relaxed text-secondary md:text-xl" style="--reveal-delay: 160ms">
-          Stop juggling four chats, two calendars, and a shared Drive folder. LoopUp is one private app for the people you actually see.
-        </p>
-
-        <!-- CTAs -->
-        <div class="reveal mt-10 flex flex-wrap justify-center gap-3" style="--reveal-delay: 240ms">
-          <a href="#" class="haptic-tap btn-primary">
-            <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-            Download for iPhone
-          </a>
-          <a href="#" class="haptic-tap btn-secondary text-sm" style="padding:.625rem 1.25rem;">
-            <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" aria-hidden="true"><path fill="#EA4335" d="M5.84 21.17 13.69 12 5.84 2.83A2 2 0 0 0 5 4.5v15a2 2 0 0 0 .84 1.67z"/><path fill="#FBBC05" d="m16.42 9.1-2.6-1.5-3.06 3.4 3.06 3.4 2.63-1.52A2 2 0 0 0 16.42 9.1z"/><path fill="#4285F4" d="m5.84 2.83 7.85 9.17 2.12-2.36-7.27-4.2a2 2 0 0 0-2.7-.61z"/><path fill="#34A853" d="m5.84 21.17a2 2 0 0 0 2.7-.61l7.27-4.2-2.12-2.36z"/></svg>
-            Get on Google Play
-          </a>
-        </div>
-
-        <!-- Honest one-liner -->
-        <p class="reveal mt-6 text-sm text-secondary" style="--reveal-delay: 320ms">Free · iOS &amp; Android · Built for groups of 4–12.</p>
-
-        <!-- Phone stage -->
-        <div class="reveal mt-20 flex justify-center" style="--reveal-delay: 400ms">
-          <div class="phone-float-a">
-            <div class="iphone-shell">
-              <div class="iphone-island" aria-hidden="true"></div>
-              <img src="./assets/screen-home.png" alt="LoopUp Home screen" class="iphone-screen-img" />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ══ FEATURES ══ -->
-      <section class="bg-system px-6 py-28 md:py-36">
-        <div class="mx-auto max-w-6xl">
-          <div class="reveal feat-header mb-16 text-center">
-            <p class="text-sm font-semibold tracking-wide text-[#ff5c47]">Everything your group needs</p>
-            <h2 class="mt-4 text-4xl font-bold tracking-[-0.03em] text-ink md:text-[3.25rem]">One app. Three pillars.</h2>
-            <p class="mx-auto mt-4 max-w-md text-lg text-secondary">Built into one simple, private space — nothing scattered across five different apps.</p>
-          </div>
-          <div class="features-grid grid gap-5 md:grid-cols-3">
-
-            <article class="reveal feature-card rounded-2xl p-8 md:p-10">
-              <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-[#fff0ee]">
-                <svg class="h-6 w-6 text-[#ff5c47]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-              </div>
-              <h3 class="text-2xl font-bold tracking-tight text-ink">Plan</h3>
-              <p class="mt-3 text-base leading-relaxed text-secondary">Shared events, RSVP, reminders, and recurring plans — so the whole group stays in sync.</p>
-              <div class="mt-6 flex flex-wrap gap-2">
-                <span class="rounded-full bg-system px-3 py-1 text-xs font-medium text-secondary">Events</span>
-                <span class="rounded-full bg-system px-3 py-1 text-xs font-medium text-secondary">RSVP</span>
-                <span class="rounded-full bg-system px-3 py-1 text-xs font-medium text-secondary">Reminders</span>
-              </div>
-            </article>
-
-            <article class="reveal feature-card rounded-2xl p-8 md:p-10">
-              <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-[#fff0ee]">
-                <svg class="h-6 w-6 text-[#ff5c47]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/><path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/><path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/><path d="M14 14.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5z"/><path d="M15.5 19H14v1.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z"/><path d="M10 9.5C10 8.67 9.33 8 8.5 8h-5C2.67 8 2 8.67 2 9.5S2.67 11 3.5 11h5c.83 0 1.5-.67 1.5-1.5z"/><path d="M8.5 5H10V3.5C10 2.67 9.33 2 8.5 2S7 2.67 7 3.5 7.67 5 8.5 5z"/></svg>
-              </div>
-              <h3 class="text-2xl font-bold tracking-tight text-ink">Play</h3>
-              <p class="mt-3 text-base leading-relaxed text-secondary">Truth or Dare, Would You Rather, Imposter, Memory Round — built for groups, not strangers.</p>
-              <div class="mt-6 flex flex-wrap gap-2">
-                <span class="rounded-full bg-system px-3 py-1 text-xs font-medium text-secondary">4 games</span>
-                <span class="rounded-full bg-system px-3 py-1 text-xs font-medium text-secondary">Pass &amp; play</span>
-                <span class="rounded-full bg-system px-3 py-1 text-xs font-medium text-secondary">Free</span>
-              </div>
-            </article>
-
-            <article class="reveal feature-card rounded-2xl p-8 md:p-10">
-              <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-[#fff0ee]">
-                <svg class="h-6 w-6 text-[#ff5c47]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-              </div>
-              <h3 class="text-2xl font-bold tracking-tight text-ink">Share</h3>
-              <p class="mt-3 text-base leading-relaxed text-secondary">Memory wall for photos, voice notes, and updates — every shared moment, easy to revisit.</p>
-              <div class="mt-6 flex flex-wrap gap-2">
-                <span class="rounded-full bg-system px-3 py-1 text-xs font-medium text-secondary">Photos</span>
-                <span class="rounded-full bg-system px-3 py-1 text-xs font-medium text-secondary">Voice notes</span>
-                <span class="rounded-full bg-system px-3 py-1 text-xs font-medium text-secondary">Updates</span>
-              </div>
-            </article>
-
-          </div>
-        </div>
-      </section>
-
-      <!-- ══ HOW IT WORKS ══ -->
-      <section class="bg-white px-6 py-28 md:py-36">
-        <div class="mx-auto max-w-6xl">
-          <div class="reveal steps-header mb-20 text-center">
-            <p class="text-sm font-semibold tracking-wide text-[#ff5c47]">Simple to start</p>
-            <h2 class="mt-4 text-4xl font-bold tracking-[-0.03em] text-ink md:text-[3.25rem]">Up and running<br />in 60 seconds.</h2>
-          </div>
-          <div class="steps-grid relative grid gap-12 md:grid-cols-3">
-            <div id="steps-line" class="pointer-events-none absolute left-[calc(33.3%+1.5rem)] right-[calc(33.3%+1.5rem)] top-6 hidden h-px origin-left bg-line md:block"></div>
-
-            <div class="reveal step-item text-center">
-              <div class="mx-auto mb-6 flex h-12 w-12 items-center justify-center rounded-full border border-line bg-white text-sm font-bold text-[#ff5c47]">01</div>
-              <h3 class="text-xl font-semibold tracking-tight text-ink">Create a group</h3>
-              <p class="mt-3 text-base leading-relaxed text-secondary">Name it, make it yours. Takes 30 seconds.</p>
-            </div>
-            <div class="reveal step-item text-center">
-              <div class="mx-auto mb-6 flex h-12 w-12 items-center justify-center rounded-full border border-line bg-white text-sm font-bold text-[#ff5c47]">02</div>
-              <h3 class="text-xl font-semibold tracking-tight text-ink">Invite friends</h3>
-              <p class="mt-3 text-base leading-relaxed text-secondary">Share a 6-digit code. No sign-up required for members.</p>
-            </div>
-            <div class="reveal step-item text-center">
-              <div class="mx-auto mb-6 flex h-12 w-12 items-center justify-center rounded-full border border-line bg-white text-sm font-bold text-[#ff5c47]">03</div>
-              <h3 class="text-xl font-semibold tracking-tight text-ink">Play &amp; plan</h3>
-              <p class="mt-3 text-base leading-relaxed text-secondary">Games, events &amp; memories — all in one private space.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ══ UPDATES CALLOUT ══ -->
-      <section class="bg-system px-6 py-28 md:py-36">
-        <div class="mx-auto max-w-6xl">
-          <div class="reveal callout-card overflow-hidden rounded-3xl bg-white p-12 text-center shadow-sm md:p-20">
-            <p class="text-sm font-semibold tracking-wide text-[#ff5c47]">What's new</p>
-            <h2 class="mx-auto mt-4 max-w-2xl text-3xl font-bold tracking-[-0.03em] text-ink md:text-[2.75rem]">Always improving,<br />always shipping.</h2>
-            <p class="mx-auto mt-5 max-w-md text-lg text-secondary">Feature releases, roadmap progress, and product notes — so your group always knows what's coming.</p>
-            <div class="mt-10">
-              <a href="./updates.html" class="haptic-tap btn-primary">
-                See Product Updates
-                <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ══ FINAL CTA ══ -->
-      <section class="bg-white px-6 py-28 text-center md:py-40">
-        <div class="mx-auto max-w-6xl">
-          <div class="reveal cta-final">
-            <p class="text-sm font-semibold tracking-wide text-[#ff5c47]">Download now</p>
-            <h2 class="mx-auto mt-5 max-w-2xl text-4xl font-extrabold leading-[1.06] tracking-[-0.04em] text-ink md:text-[4.5rem]">
-              One space for the people you care about.
-            </h2>
-            <p class="mx-auto mt-6 max-w-sm text-lg text-secondary">Free to download. Private by design. Built for real groups.</p>
-            <div class="mt-10 flex flex-wrap justify-center gap-3">
-              <a href="#" class="haptic-tap btn-primary text-base" style="padding:.875rem 2rem;">
-                <svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-                Download on App Store
-              </a>
-              <a href="#" class="haptic-tap btn-secondary text-base" style="padding:.875rem 2rem;">
-                <svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" aria-hidden="true"><path fill="#EA4335" d="M5.84 21.17 13.69 12 5.84 2.83A2 2 0 0 0 5 4.5v15a2 2 0 0 0 .84 1.67z"/><path fill="#FBBC05" d="m16.42 9.1-2.6-1.5-3.06 3.4 3.06 3.4 2.63-1.52A2 2 0 0 0 16.42 9.1z"/><path fill="#4285F4" d="m5.84 2.83 7.85 9.17 2.12-2.36-7.27-4.2a2 2 0 0 0-2.7-.61z"/><path fill="#34A853" d="m5.84 21.17a2 2 0 0 0 2.7-.61l7.27-4.2-2.12-2.36z"/></svg>
-                Get on Google Play
-              </a>
-            </div>
-            <div class="mt-8 flex flex-wrap items-center justify-center gap-3 text-sm text-secondary">
-              <span>100% Private</span>
-              <span class="h-3 w-px bg-line"></span>
-              <span>Free to download</span>
-              <span class="h-3 w-px bg-line"></span>
-              <span>iOS &amp; Android</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-    </main>
-
-    <!-- ══ FOOTER ══ -->
-    <footer class="border-t border-line bg-system">
-      <div class="mx-auto max-w-6xl px-6 py-16">
-        <div class="grid gap-10 md:grid-cols-[2fr_1fr_1fr]">
-          <div>
-            <a href="./index.html" class="logo-wordmark">LoopUp</a>
-            <p class="mt-4 max-w-xs text-sm text-secondary">One private space for families and close friends to connect, plan, and play.</p>
-            <div class="mt-6 flex flex-wrap gap-3">
-              <a href="#" class="haptic-tap inline-flex items-center gap-2 rounded-xl border border-line bg-white px-4 py-2.5 text-xs font-medium text-secondary transition hover:border-[#d2d2d7] hover:text-ink">
-                <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-                App Store
-              </a>
-              <a href="#" class="haptic-tap inline-flex items-center gap-2 rounded-xl border border-line bg-white px-4 py-2.5 text-xs font-medium text-secondary transition hover:text-ink">
-                <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" aria-hidden="true"><path fill="#EA4335" d="M5.84 21.17 13.69 12 5.84 2.83A2 2 0 0 0 5 4.5v15a2 2 0 0 0 .84 1.67z"/><path fill="#FBBC05" d="m16.42 9.1-2.6-1.5-3.06 3.4 3.06 3.4 2.63-1.52A2 2 0 0 0 16.42 9.1z"/><path fill="#4285F4" d="m5.84 2.83 7.85 9.17 2.12-2.36-7.27-4.2a2 2 0 0 0-2.7-.61z"/><path fill="#34A853" d="m5.84 21.17a2 2 0 0 0 2.7-.61l7.27-4.2-2.12-2.36z"/></svg>
-                Google Play
-              </a>
-            </div>
-          </div>
-          <div>
-            <p class="text-xs font-semibold uppercase tracking-[0.16em] text-secondary">Legal</p>
-            <ul class="mt-4 space-y-3">
-              <li><a href="./privacy.html" class="haptic-tap text-sm text-secondary transition hover:text-ink">Privacy Policy</a></li>
-              <li><a href="#" class="haptic-tap text-sm text-secondary transition hover:text-ink">Terms of Use</a></li>
-            </ul>
-          </div>
-          <div>
-            <p class="text-xs font-semibold uppercase tracking-[0.16em] text-secondary">Company</p>
-            <ul class="mt-4 space-y-3">
-              <li><a href="./about.html" class="haptic-tap text-sm text-secondary transition hover:text-ink">About</a></li>
-              <li><a href="./updates.html" class="haptic-tap text-sm text-secondary transition hover:text-ink">Updates</a></li>
-              <li><a href="./contact.html" class="haptic-tap text-sm text-secondary transition hover:text-ink">Contact</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="mt-12 border-t border-line pt-8">
-          <p class="text-xs text-secondary">© <span id="year"></span> LoopUp. All rights reserved.</p>
-        </div>
-      </div>
-    </footer>
-
-    <div id="mobile-nav" class="mobile-nav" role="dialog" aria-modal="true" aria-label="Site menu">
-      <div class="mobile-nav__backdrop" data-mobile-nav-close></div>
-      <div class="mobile-nav__panel">
-        <button type="button" class="absolute top-4 right-4 p-2" aria-label="Close menu" data-mobile-nav-close>
-          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6l-12 12"/></svg>
-        </button>
-        <a href="./index.html" class="mobile-nav__link" aria-current="page">Home</a>
-        <a href="./updates.html" class="mobile-nav__link">Updates</a>
-        <a href="./about.html" class="mobile-nav__link">About</a>
-        <a href="./contact.html" class="mobile-nav__link">Contact</a>
-        <div class="mt-6"><a href="#" class="haptic-tap btn-primary w-full justify-center">Download</a></div>
-      </div>
-    </div>
-
-    <script src="./assets/site.js" defer></script>
-  </body>
-</html>
+</head>
+<body class="font-body-md text-on-surface selection:bg-primary selection:text-on-primary">
+<!-- Top Navigation -->
+<header class="fixed top-0 w-full px-6 py-4 flex items-center justify-between z-50 bg-[#010120]/20 backdrop-blur-md">
+<div class="flex items-center gap-10">
+<span class="text-2xl font-bold tracking-tighter text-white font-headline-lg">LoopUp</span>
+<nav class="hidden md:flex gap-8">
+<a class="text-white font-medium border-b-2 border-primary pb-1 font-headline-lg" href="#">Games</a>
+<a class="text-white/60 font-medium hover:text-white transition-colors font-headline-lg" href="#">Discover</a>
+<a class="text-white/60 font-medium hover:text-white transition-colors font-headline-lg" href="#">Trending</a>
+<a class="text-white/60 font-medium hover:text-white transition-colors font-headline-lg" href="#">Studio</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-white/60 font-medium hover:text-white transition-colors font-headline-lg">Login</button>
+<button class="bg-white text-[#010120] px-6 py-2 rounded-full font-bold hover:bg-primary transition-all font-headline-lg">Get Started</button>
+</div>
+</header>
+<main>
+<!-- Hero Section -->
+<section class="pastel-gradient-bg min-h-screen flex flex-col items-center justify-center pt-24 pb-40 px-6 text-center">
+<div class="relative z-10 max-w-4xl mx-auto">
+<div class="inline-flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-1 rounded-full mb-10 backdrop-blur-md">
+<span class="text-white/60 font-mono-label text-[10px] tracking-widest uppercase">New Release + 60-Second Onboarding</span>
+</div>
+<h1 class="font-display-xl text-[80px] text-white tracking-[-0.04em] mb-6 leading-[0.9]">
+                    Your group’s <br/> <span class="italic font-light">home base.</span>
+</h1>
+<p class="text-white/60 text-xl max-w-2xl mx-auto mb-12">
+                    Level up your group chat with a premium store of bite-sized, high-fidelity minigames. Free to download on iOS and Android.
+</p>
+<div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+<button class="bg-primary text-[#010120] px-10 py-5 rounded-full text-lg font-bold shadow-xl shadow-primary/20 flex items-center gap-3 playable-button font-headline-lg">
+<span class="material-symbols-outlined">download</span>
+                        Get the App
+</button>
+<button class="bg-white/5 border border-white/10 backdrop-blur-xl text-white px-10 py-5 rounded-full text-lg font-bold hover:bg-white/10 transition-all font-headline-lg">
+                        Explore Games
+</button>
+</div>
+</div>
+<!-- Floating UI Elements -->
+<div class="absolute inset-0 pointer-events-none overflow-hidden">
+<div class="absolute top-1/4 left-10 w-64 h-80 glass-card rounded-[32px] rotate-[-12deg] opacity-20 flex flex-col p-6">
+<div class="w-10 h-10 rounded-xl bg-tertiary/20 flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-tertiary">sports_esports</span>
+</div>
+<div class="h-3 w-3/4 bg-white/10 rounded-full mb-3"></div>
+<div class="h-3 w-1/2 bg-white/10 rounded-full"></div>
+</div>
+<div class="absolute bottom-1/4 right-10 w-56 h-72 glass-card rounded-[32px] rotate-[8deg] opacity-20 flex flex-col p-6">
+<div class="w-10 h-10 rounded-xl bg-secondary/20 flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-secondary">group</span>
+</div>
+<div class="h-3 w-2/3 bg-white/10 rounded-full mb-3"></div>
+<div class="h-3 w-1/2 bg-white/10 rounded-full"></div>
+</div>
+</div>
+</section>
+<!-- Three Pillars Section -->
+<section class="max-w-7xl mx-auto px-6 -mt-20 relative z-20 mb-40">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Plan -->
+<div class="glass-card p-10 flex flex-col gap-6">
+<div class="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center border border-white/10">
+<span class="material-symbols-outlined text-white text-3xl">calendar_today</span>
+</div>
+<div>
+<h3 class="font-headline-lg text-2xl text-white mb-3">Plan</h3>
+<p class="text-white/40 leading-relaxed">Coordinate game nights and tournaments with native scheduling tools designed for busy squads.</p>
+</div>
+</div>
+<!-- Play -->
+<div class="glass-card p-10 flex flex-col gap-6">
+<div class="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center border border-white/10">
+<span class="material-symbols-outlined text-white text-3xl">videogame_asset</span>
+</div>
+<div>
+<h3 class="font-headline-lg text-2xl text-white mb-3">Play</h3>
+<p class="text-white/40 leading-relaxed">Instant-access minigames from racing to puzzles. Zero friction, just pure high-performance fun.</p>
+</div>
+</div>
+<!-- Share -->
+<div class="glass-card p-10 flex flex-col gap-6">
+<div class="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center border border-white/10">
+<span class="material-symbols-outlined text-white text-3xl">share</span>
+</div>
+<div>
+<h3 class="font-headline-lg text-2xl text-white mb-3">Share</h3>
+<p class="text-white/40 leading-relaxed">Capture clips and leaderboards to keep the bragging rights alive long after the game ends.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Simple to Start (Stepper Flow) -->
+<section class="max-w-7xl mx-auto px-6 py-32">
+<div class="text-center mb-24">
+<h2 class="font-headline-lg text-5xl text-white mb-4">Simple to start</h2>
+<p class="text-white/40 text-lg">Onboarded and playing in under 60 seconds.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative"><div class="absolute inset-0 pointer-events-none hidden md:block">
+<svg class="w-full h-full" fill="none" viewbox="0 0 1000 400" xmlns="http://www.w3.org/2000/svg">
+<path class="curved-line" d="M160 150 Q 330 150 500 250 T 840 150" fill="none" stroke="url(#line-gradient)" stroke-width="2"></path>
+<defs>
+<lineargradient id="line-gradient" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" stop-color="#c3c3ec" stop-opacity="0"></stop>
+<stop offset="50%" stop-color="#c3c3ec" stop-opacity="0.5"></stop>
+<stop offset="100%" stop-color="#c3c3ec" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+</svg>
+</div>
+<!-- Step 1 -->
+<div class="flex flex-col items-center">
+<div class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white font-bold mb-10 bg-[#010120] relative z-10">1</div>
+<div class="w-full max-w-[280px] aspect-square rounded-[40px] glass-card flex items-center justify-center relative group mb-8">
+<div class="absolute inset-0 bg-primary/5 rounded-[40px] blur-2xl group-hover:bg-primary/10 transition-all duration-500"></div>
+<div class="relative z-10 w-24 h-24 rounded-3xl bg-white/5 border border-white/10 flex items-center justify-center shadow-2xl">
+<span class="material-symbols-outlined text-primary text-5xl">group_add</span>
+</div>
+</div>
+<h4 class="font-headline-lg text-white text-lg mb-2">Create group</h4>
+<p class="text-white/40 text-sm text-center px-10">Set up your squad space with a custom name and theme in two taps.</p>
+</div>
+<!-- Step 2 -->
+<div class="flex flex-col items-center md:mt-24">
+<div class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white font-bold mb-10 bg-[#010120] relative z-10">2</div>
+<div class="w-full max-w-[280px] aspect-square rounded-[40px] glass-card flex items-center justify-center relative group mb-8">
+<div class="absolute inset-0 bg-secondary/5 rounded-[40px] blur-2xl group-hover:bg-secondary/10 transition-all duration-500"></div>
+<div class="relative z-10 w-24 h-24 rounded-3xl bg-white/5 border border-white/10 flex items-center justify-center shadow-2xl">
+<span class="material-symbols-outlined text-secondary text-5xl">person_add</span>
+</div>
+</div>
+<h4 class="font-headline-lg text-white text-lg mb-2">Invite</h4>
+<p class="text-white/40 text-sm text-center px-10">Ping your friends via SMS, Discord, or WhatsApp. No account required for them to join.</p>
+</div>
+<!-- Step 3 -->
+<div class="flex flex-col items-center">
+<div class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white font-bold mb-10 bg-[#010120] relative z-10">3</div>
+<div class="w-full max-w-[280px] aspect-square rounded-[40px] glass-card flex items-center justify-center relative group mb-8">
+<div class="absolute inset-0 bg-tertiary/5 rounded-[40px] blur-2xl group-hover:bg-tertiary/10 transition-all duration-500"></div>
+<div class="relative z-10 w-24 h-24 rounded-3xl bg-white/5 border border-white/10 flex items-center justify-center shadow-2xl">
+<span class="material-symbols-outlined text-tertiary text-5xl">sports_esports</span>
+</div>
+</div>
+<h4 class="font-headline-lg text-white text-lg mb-2">Play</h4>
+<p class="text-white/40 text-sm text-center px-10">Jump straight into the action. Pick a game and start the lobby instantly.</p>
+</div>
+</div>
+</section>
+<!-- What's New Section -->
+<section class="max-w-7xl mx-auto px-6 py-32">
+<h2 class="font-headline-lg text-5xl text-white mb-16">What’s New</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Large Feature -->
+<div class="glass-card rounded-[32px] overflow-hidden relative group">
+<img alt="Studio Mode" class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700 min-h-[500px]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA18Mte_YVecGGcoh2-E0BVGwKRn5PG87Py9rNMHFHtxE1JMJE75OBLEJI0WzqagnpkMRMLf_FTfyRq60OzkilOcC8f15imkoZe6zTdOwLc74JPxMiveTfnItQEyBoVqhnQNut4XaNjCgdsHlLojwPVQ4lPTgqYDBSPs1GntqsflUcM3p_-tnBfrFLoZQDlRfc5-jOTOl5tFiIKUwWIi67soDUc47HUWo6dVbaaHhfWND066CsRwDKVaiQnwpnJzzwUTY09s1-zz6k"/>
+<div class="absolute inset-0 bg-gradient-to-t from-[#010120] via-transparent to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-10">
+<span class="inline-block px-3 py-1 rounded-full bg-white/10 text-white/60 font-mono-label text-[10px] mb-4 border border-white/10">PLATFORM UPDATE</span>
+<h3 class="font-headline-lg text-4xl text-white mb-4">Studio Mode</h3>
+<p class="text-white/40 max-w-sm">Create your own minigames with our no-code engine. Share them with the community and earn rewards.</p>
+</div>
+</div>
+<!-- Column for 2 smaller features -->
+<div class="flex flex-col gap-6">
+<div class="glass-card p-10 flex-1 flex flex-col justify-between group">
+<div class="flex justify-between items-start">
+<div class="max-w-[280px]">
+<span class="inline-block px-3 py-1 rounded-full bg-white/10 text-white/60 font-mono-label text-[10px] mb-4 border border-white/10 uppercase">New Game</span>
+<h3 class="font-headline-lg text-3xl text-white mb-2">Neon Sprint</h3>
+<p class="text-white/40">Competitive parkour on high-altitude platforms.</p>
+</div>
+<div class="w-32 h-20 rounded-xl overflow-hidden border border-white/10">
+<img alt="Neon Sprint" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfujXMrqSLMMdPL1lpJQydBYuZWywfBxKaCs7eCl1JdfD5uXSNotVh7PCgEXiEbCINKAjavKAoEPdEG5KQaUqJsuoKh8rQCCuhGAKyEW70_vMnlpS8LrKNDZrxchz_K2-LjyXEpeVWS1jw3VfHVCHfjVz58v8WC0EJiCQbfie32NSAh9TSLgpfExm_0DfhHdx_rOb-wB_l54z-efs27wbP8A58raynU3CPRRU-OgRZQQLzvG72eSQkjuahlY-0xQ_zoRcelAT9fUo"/>
+</div>
+</div>
+</div>
+<div class="glass-card p-10 flex-1 flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<div class="max-w-[280px]">
+<span class="inline-block px-3 py-1 rounded-full bg-white/10 text-white/60 font-mono-label text-[10px] mb-4 border border-white/10 uppercase">Social</span>
+<h3 class="font-headline-lg text-3xl text-white mb-2">Voice Chat 2.0</h3>
+<p class="text-white/40">Spatial audio for more immersive group play.</p>
+</div>
+<div class="w-20 h-20 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-4xl">mic</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="max-w-7xl mx-auto px-6 py-40">
+<div class="glass-card p-20 text-center relative overflow-hidden bg-gradient-to-br from-white/5 to-transparent">
+<h2 class="font-headline-lg text-6xl text-white mb-6">Ready to play?</h2>
+<p class="text-white/40 text-xl max-w-xl mx-auto mb-12">Join over 500,000 groups already making every night a game night.</p>
+<div class="flex flex-col md:flex-row items-center justify-center gap-6">
+<button class="bg-black text-white px-8 py-4 rounded-2xl flex items-center gap-4 hover:bg-white/10 transition-colors border border-white/10">
+<span class="material-symbols-outlined text-3xl">phone_iphone</span>
+<div class="text-left">
+<p class="text-[10px] font-mono-label uppercase text-white/40 leading-none">Download on the</p>
+<p class="text-xl font-bold font-headline-lg leading-tight">App Store</p>
+</div>
+</button>
+<button class="bg-black text-white px-8 py-4 rounded-2xl flex items-center gap-4 hover:bg-white/10 transition-colors border border-white/10">
+<span class="material-symbols-outlined text-3xl">phone_android</span>
+<div class="text-left">
+<p class="text-[10px] font-mono-label uppercase text-white/40 leading-none">Get it on</p>
+<p class="text-xl font-bold font-headline-lg leading-tight">Google Play</p>
+</div>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#010120] w-full pt-40 pb-12 px-6 flex flex-col items-center text-center">
+<h2 class="text-[15vw] font-black tracking-tighter text-white/5 leading-none select-none mb-20 font-headline-lg">LoopUp</h2>
+<div class="flex flex-wrap justify-center gap-12 mb-16 relative z-10">
+<a class="text-white/40 font-headline-lg hover:text-white transition-colors" href="#">Privacy</a>
+<a class="text-white/40 font-headline-lg hover:text-white transition-colors" href="#">Terms</a>
+<a class="text-white/40 font-headline-lg hover:text-white transition-colors" href="#">Support</a>
+<a class="text-white/40 font-headline-lg hover:text-white transition-colors" href="#">Careers</a>
+<a class="text-white/40 font-headline-lg hover:text-white transition-colors" href="#">API</a>
+</div>
+<p class="text-white/20 font-headline-lg text-sm">© 2024 LoopUp. Engineered for Play.</p>
+</footer>
+</body></html>
