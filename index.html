@@ -16,13 +16,12 @@
     <meta name="twitter:title" content="LoopUp | Plan, Play, Share" />
     <meta name="twitter:description" content="Private group app for families and friends to coordinate and stay connected." />
     <link rel="canonical" href="https://loopup.app/" />
+    <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Nunito:wght@800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./assets/site.css" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
     <script>
       tailwind.config = {
         theme: {
@@ -34,153 +33,6 @@
         }
       };
     </script>
-    <style>
-      :root { --spring-ease:cubic-bezier(0.22,1,0.36,1); --ui-fast:200ms; --ui-med:480ms; }
-      /* scroll-behavior handled by Lenis */
-
-      /* ── Nav ── */
-      .site-nav {
-        background: rgba(255,255,255,0.82);
-        backdrop-filter: saturate(180%) blur(20px);
-        -webkit-backdrop-filter: saturate(180%) blur(20px);
-        border-bottom: 1px solid rgba(0,0,0,0.1);
-      }
-
-      /* ── Logo ── */
-      .logo-wordmark {
-        font-family:'Nunito',system-ui,sans-serif;
-        font-size:1.625rem;
-        font-weight:900;
-        letter-spacing:-0.01em;
-        line-height:1;
-        color:#ff5c47;
-        text-decoration:none;
-        position:relative;
-        display:inline-block;
-      }
-      .logo-wordmark::after {
-        content:"";
-        position:absolute;
-        bottom:-3px;
-        left:50%;
-        transform:translateX(-50%);
-        width:36%;
-        height:2.5px;
-        border-radius:9999px;
-        background:#ff5c47;
-        opacity:0.5;
-      }
-
-      /* ── Skip link ── */
-      .skip-link { position:absolute; left:1rem; top:-3rem; z-index:50; border-radius:9999px; background:#ff5c47; color:#fff; padding:.5rem .9rem; font-size:.875rem; transition:top 200ms ease; }
-      .skip-link:focus { top:1rem; }
-      a:focus-visible { outline:2px solid rgba(255,92,71,.7); outline-offset:3px; }
-
-      /* ── Scroll reveal (fallback for no-JS) — GSAP handles transitions ── */
-      .gsap-hidden { opacity:0; }
-
-      /* ── Phone shell ── */
-      .iphone-shell {
-        position:relative;
-        width:255px;
-        border-radius:52px;
-        background:linear-gradient(170deg,#1c1c1e,#111113);
-        border:9px solid #1a1a1c;
-        overflow:hidden;
-        box-shadow:
-          inset 0 0 0 1px rgba(255,255,255,.07),
-          inset 0 1px 0 rgba(255,255,255,.1),
-          0 50px 100px rgba(0,0,0,.22),
-          0 20px 40px rgba(0,0,0,.1);
-      }
-      .iphone-island {
-        position:absolute;
-        top:12px;
-        left:50%;
-        transform:translateX(-50%);
-        width:86px;
-        height:25px;
-        background:#060606;
-        border-radius:999px;
-        z-index:10;
-        pointer-events:none;
-      }
-      .iphone-screen-img {
-        width:100%;
-        height:auto;
-        display:block;
-        border-radius:43px;
-        image-rendering:-webkit-optimize-contrast;
-        image-rendering:crisp-edges;
-      }
-
-      /* ── Phone float ── */
-      .phone-float-a { animation:phoneFloatA 7s ease-in-out infinite alternate; }
-      .phone-float-b { animation:phoneFloatB 7s ease-in-out infinite alternate; animation-delay:-3.5s; }
-      @keyframes phoneFloatA { from{transform:translateY(0)} to{transform:translateY(-20px)} }
-      @keyframes phoneFloatB { from{transform:translateY(0)} to{transform:translateY(-14px)} }
-
-      /* ── Feature card ── */
-      .feature-card {
-        background:#fff;
-        border:1px solid rgba(0,0,0,.06);
-        transition:box-shadow var(--ui-med) var(--spring-ease),transform var(--ui-med) var(--spring-ease);
-      }
-      .feature-card:hover {
-        box-shadow:0 12px 40px rgba(0,0,0,.08);
-        transform:translateY(-3px);
-      }
-
-      /* ── CTA primary shimmer ── */
-      @keyframes shimmerSlide { 0%{transform:translateX(-100%) skewX(-12deg)} 100%{transform:translateX(220%) skewX(-12deg)} }
-      .btn-primary {
-        position:relative;
-        overflow:hidden;
-        background:#ff5c47;
-        color:#fff;
-        border-radius:9999px;
-        font-size:.9375rem;
-        font-weight:600;
-        padding:.75rem 1.625rem;
-        display:inline-flex;
-        align-items:center;
-        gap:.625rem;
-        transition:background var(--ui-fast) ease,box-shadow var(--ui-fast) ease,transform var(--ui-fast) ease;
-        box-shadow:0 4px 18px rgba(255,92,71,.28);
-      }
-      .btn-primary:hover { background:#f04f3a; box-shadow:0 8px 28px rgba(255,92,71,.36); transform:translateY(-1px); }
-      .btn-primary:active { transform:scale(.98); }
-      .btn-primary::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent); transform:translateX(-100%) skewX(-12deg); }
-      .btn-primary:hover::after { animation:shimmerSlide .55s ease forwards; }
-
-      .btn-secondary {
-        display:inline-flex;
-        align-items:center;
-        gap:.625rem;
-        border-radius:9999px;
-        border:1px solid rgba(0,0,0,.14);
-        background:transparent;
-        color:#1d1d1f;
-        font-size:.9375rem;
-        font-weight:600;
-        padding:.75rem 1.625rem;
-        transition:background var(--ui-fast) ease,border-color var(--ui-fast) ease;
-      }
-      .btn-secondary:hover { background:rgba(0,0,0,.04); border-color:rgba(0,0,0,.22); }
-
-      /* ── Policy backdrop ── */
-      .policy-backdrop { position:fixed; inset:0; z-index:60; display:none; align-items:center; justify-content:center; padding:1rem; background:rgba(0,0,0,.48); backdrop-filter:blur(10px); }
-      .policy-backdrop.active { display:flex; }
-      .policy-card { width:min(100%,34rem); }
-
-      /* ── Reduced motion ── */
-      @media (prefers-reduced-motion:reduce) {
-        .phone-float-a,.phone-float-b,.btn-primary::after { animation:none!important; }
-        .feature-card:hover { transform:none; }
-      }
-      html.low-motion .phone-float-a,
-      html.low-motion .phone-float-b { animation-duration:13s; }
-    </style>
   </head>
   <body class="bg-white font-sans text-ink antialiased">
     <a href="#main-content" class="skip-link">Skip to content</a>
@@ -195,7 +47,10 @@
           <a href="./about.html" class="haptic-tap rounded-full px-3.5 py-1.5 font-medium text-secondary transition hover:bg-black/[0.05] hover:text-ink">About</a>
           <a href="./contact.html" class="haptic-tap rounded-full px-3.5 py-1.5 font-medium text-secondary transition hover:bg-black/[0.05] hover:text-ink">Contact</a>
         </nav>
-        <a href="#" class="haptic-tap btn-primary text-sm">Download</a>
+        <a href="#" class="haptic-tap btn-primary hidden text-sm md:inline-flex">Download</a>
+        <button type="button" class="nav-toggle haptic-tap rounded-xl border border-line p-2" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
       </div>
     </header>
 
@@ -204,63 +59,42 @@
       <!-- ══ HERO ══ -->
       <section class="overflow-hidden bg-white px-6 pb-0 pt-24 text-center md:pt-32">
         <!-- Eyebrow -->
-        <div id="hero-badge" class="gsap-hidden mb-6 inline-flex items-center gap-2 rounded-full bg-[#fff0ee] px-4 py-1.5 text-xs font-semibold text-[#ff5c47]">
+        <div class="reveal mb-6 inline-flex items-center gap-2 rounded-full bg-[#fff0ee] px-4 py-1.5 text-xs font-semibold text-[#ff5c47]">
           <span class="h-1.5 w-1.5 rounded-full bg-[#ff5c47]"></span>
-          Now available · iOS &amp; Android · Free to download
+          4 games · shared calendar · memory wall — for the 8 people that matter.
         </div>
 
         <!-- Headline -->
-        <h1 id="hero-title" class="gsap-hidden mx-auto max-w-3xl text-[3.25rem] font-extrabold leading-[1.05] tracking-[-0.04em] text-ink md:text-[5.5rem]">
-          Your group's<br />home base.
+        <h1 class="reveal mx-auto max-w-3xl text-[3.25rem] font-extrabold leading-[1.05] tracking-[-0.04em] text-ink md:text-[5.5rem]" style="--reveal-delay: 80ms">
+          The group chat your close ones deserve.
         </h1>
 
         <!-- Subtitle -->
-        <p id="hero-sub" class="gsap-hidden mx-auto mt-7 max-w-[30rem] text-lg leading-relaxed text-secondary md:text-xl">
-          Games, plans &amp; shared moments — just for the people you actually care about.
+        <p class="reveal mx-auto mt-7 max-w-xl text-lg leading-relaxed text-secondary md:text-xl" style="--reveal-delay: 160ms">
+          Stop juggling four chats, two calendars, and a shared Drive folder. LoopUp is one private app for the people you actually see.
         </p>
 
         <!-- CTAs -->
-        <div id="hero-ctas" class="gsap-hidden mt-10 flex flex-wrap justify-center gap-3">
+        <div class="reveal mt-10 flex flex-wrap justify-center gap-3" style="--reveal-delay: 240ms">
           <a href="#" class="haptic-tap btn-primary">
             <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-            App Store
+            Download for iPhone
           </a>
-          <a href="#" class="haptic-tap btn-secondary">
+          <a href="#" class="haptic-tap btn-secondary text-sm" style="padding:.625rem 1.25rem;">
             <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" aria-hidden="true"><path fill="#EA4335" d="M5.84 21.17 13.69 12 5.84 2.83A2 2 0 0 0 5 4.5v15a2 2 0 0 0 .84 1.67z"/><path fill="#FBBC05" d="m16.42 9.1-2.6-1.5-3.06 3.4 3.06 3.4 2.63-1.52A2 2 0 0 0 16.42 9.1z"/><path fill="#4285F4" d="m5.84 2.83 7.85 9.17 2.12-2.36-7.27-4.2a2 2 0 0 0-2.7-.61z"/><path fill="#34A853" d="m5.84 21.17a2 2 0 0 0 2.7-.61l7.27-4.2-2.12-2.36z"/></svg>
-            Google Play
+            Get on Google Play
           </a>
         </div>
 
-        <!-- Social proof row -->
-        <div id="hero-social" class="gsap-hidden mt-8 flex items-center justify-center gap-5 text-sm text-secondary">
-          <div class="flex items-center gap-2">
-            <div class="flex -space-x-1.5">
-              <div class="h-6 w-6 rounded-full bg-gradient-to-br from-pink-400 to-rose-500 ring-2 ring-white"></div>
-              <div class="h-6 w-6 rounded-full bg-gradient-to-br from-violet-400 to-purple-500 ring-2 ring-white"></div>
-              <div class="h-6 w-6 rounded-full bg-gradient-to-br from-amber-400 to-orange-400 ring-2 ring-white"></div>
-              <div class="h-6 w-6 rounded-full bg-gradient-to-br from-teal-400 to-cyan-500 ring-2 ring-white"></div>
-            </div>
-            <span>Loved by real groups</span>
-          </div>
-          <span class="h-3 w-px bg-line"></span>
-          <div class="flex items-center gap-1.5">
-            <svg class="h-3.5 w-3.5 fill-amber-400" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            5.0 on App Store
-          </div>
-        </div>
+        <!-- Honest one-liner -->
+        <p class="reveal mt-6 text-sm text-secondary" style="--reveal-delay: 320ms">Free · iOS &amp; Android · Built for groups of 4–12.</p>
 
         <!-- Phone stage -->
-        <div id="hero-phones" class="gsap-hidden mt-20 flex items-end justify-center gap-8">
-          <div id="phone-a">
+        <div class="reveal mt-20 flex justify-center" style="--reveal-delay: 400ms">
+          <div class="phone-float-a">
             <div class="iphone-shell">
               <div class="iphone-island" aria-hidden="true"></div>
               <img src="./assets/screen-home.png" alt="LoopUp Home screen" class="iphone-screen-img" />
-            </div>
-          </div>
-          <div id="phone-b" class="mt-16 hidden sm:block">
-            <div class="iphone-shell">
-              <div class="iphone-island" aria-hidden="true"></div>
-              <img src="./assets/screen-gameroom.png" alt="LoopUp Game Room screen" class="iphone-screen-img" loading="lazy" />
             </div>
           </div>
         </div>
@@ -269,16 +103,16 @@
       <!-- ══ FEATURES ══ -->
       <section class="bg-system px-6 py-28 md:py-36">
         <div class="mx-auto max-w-6xl">
-          <div class="feat-header mb-16 text-center">
+          <div class="reveal feat-header mb-16 text-center">
             <p class="text-sm font-semibold tracking-wide text-[#ff5c47]">Everything your group needs</p>
             <h2 class="mt-4 text-4xl font-bold tracking-[-0.03em] text-ink md:text-[3.25rem]">One app. Three pillars.</h2>
             <p class="mx-auto mt-4 max-w-md text-lg text-secondary">Built into one simple, private space — nothing scattered across five different apps.</p>
           </div>
           <div class="features-grid grid gap-5 md:grid-cols-3">
 
-            <article class="feature-card rounded-2xl p-8 md:p-10">
+            <article class="reveal feature-card rounded-2xl p-8 md:p-10">
               <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-[#fff0ee]">
-                <svg class="h-5.5 w-5.5 h-6 w-6 text-[#ff5c47]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                <svg class="h-6 w-6 text-[#ff5c47]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
               </div>
               <h3 class="text-2xl font-bold tracking-tight text-ink">Plan</h3>
               <p class="mt-3 text-base leading-relaxed text-secondary">Shared events, RSVP, reminders, and recurring plans — so the whole group stays in sync.</p>
@@ -289,7 +123,7 @@
               </div>
             </article>
 
-            <article class="feature-card rounded-2xl p-8 md:p-10">
+            <article class="reveal feature-card rounded-2xl p-8 md:p-10">
               <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-[#fff0ee]">
                 <svg class="h-6 w-6 text-[#ff5c47]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/><path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/><path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/><path d="M14 14.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5z"/><path d="M15.5 19H14v1.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z"/><path d="M10 9.5C10 8.67 9.33 8 8.5 8h-5C2.67 8 2 8.67 2 9.5S2.67 11 3.5 11h5c.83 0 1.5-.67 1.5-1.5z"/><path d="M8.5 5H10V3.5C10 2.67 9.33 2 8.5 2S7 2.67 7 3.5 7.67 5 8.5 5z"/></svg>
               </div>
@@ -302,7 +136,7 @@
               </div>
             </article>
 
-            <article class="feature-card rounded-2xl p-8 md:p-10">
+            <article class="reveal feature-card rounded-2xl p-8 md:p-10">
               <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-[#fff0ee]">
                 <svg class="h-6 w-6 text-[#ff5c47]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
               </div>
@@ -322,24 +156,24 @@
       <!-- ══ HOW IT WORKS ══ -->
       <section class="bg-white px-6 py-28 md:py-36">
         <div class="mx-auto max-w-6xl">
-          <div class="steps-header mb-20 text-center">
+          <div class="reveal steps-header mb-20 text-center">
             <p class="text-sm font-semibold tracking-wide text-[#ff5c47]">Simple to start</p>
             <h2 class="mt-4 text-4xl font-bold tracking-[-0.03em] text-ink md:text-[3.25rem]">Up and running<br />in 60 seconds.</h2>
           </div>
           <div class="steps-grid relative grid gap-12 md:grid-cols-3">
             <div id="steps-line" class="pointer-events-none absolute left-[calc(33.3%+1.5rem)] right-[calc(33.3%+1.5rem)] top-6 hidden h-px origin-left bg-line md:block"></div>
 
-            <div class="step-item text-center">
+            <div class="reveal step-item text-center">
               <div class="mx-auto mb-6 flex h-12 w-12 items-center justify-center rounded-full border border-line bg-white text-sm font-bold text-[#ff5c47]">01</div>
               <h3 class="text-xl font-semibold tracking-tight text-ink">Create a group</h3>
               <p class="mt-3 text-base leading-relaxed text-secondary">Name it, make it yours. Takes 30 seconds.</p>
             </div>
-            <div class="step-item text-center">
+            <div class="reveal step-item text-center">
               <div class="mx-auto mb-6 flex h-12 w-12 items-center justify-center rounded-full border border-line bg-white text-sm font-bold text-[#ff5c47]">02</div>
               <h3 class="text-xl font-semibold tracking-tight text-ink">Invite friends</h3>
               <p class="mt-3 text-base leading-relaxed text-secondary">Share a 6-digit code. No sign-up required for members.</p>
             </div>
-            <div class="step-item text-center">
+            <div class="reveal step-item text-center">
               <div class="mx-auto mb-6 flex h-12 w-12 items-center justify-center rounded-full border border-line bg-white text-sm font-bold text-[#ff5c47]">03</div>
               <h3 class="text-xl font-semibold tracking-tight text-ink">Play &amp; plan</h3>
               <p class="mt-3 text-base leading-relaxed text-secondary">Games, events &amp; memories — all in one private space.</p>
@@ -351,7 +185,7 @@
       <!-- ══ UPDATES CALLOUT ══ -->
       <section class="bg-system px-6 py-28 md:py-36">
         <div class="mx-auto max-w-6xl">
-          <div class="callout-card overflow-hidden rounded-3xl bg-white p-12 text-center shadow-sm md:p-20">
+          <div class="reveal callout-card overflow-hidden rounded-3xl bg-white p-12 text-center shadow-sm md:p-20">
             <p class="text-sm font-semibold tracking-wide text-[#ff5c47]">What's new</p>
             <h2 class="mx-auto mt-4 max-w-2xl text-3xl font-bold tracking-[-0.03em] text-ink md:text-[2.75rem]">Always improving,<br />always shipping.</h2>
             <p class="mx-auto mt-5 max-w-md text-lg text-secondary">Feature releases, roadmap progress, and product notes — so your group always knows what's coming.</p>
@@ -368,7 +202,7 @@
       <!-- ══ FINAL CTA ══ -->
       <section class="bg-white px-6 py-28 text-center md:py-40">
         <div class="mx-auto max-w-6xl">
-          <div class="cta-final">
+          <div class="reveal cta-final">
             <p class="text-sm font-semibold tracking-wide text-[#ff5c47]">Download now</p>
             <h2 class="mx-auto mt-5 max-w-2xl text-4xl font-extrabold leading-[1.06] tracking-[-0.04em] text-ink md:text-[4.5rem]">
               One space for the people you care about.
@@ -437,127 +271,20 @@
       </div>
     </footer>
 
-    <!-- Policy dialog -->
-    <div id="policy-consent" class="policy-backdrop" role="dialog" aria-modal="true" aria-labelledby="policy-title">
-      <div class="policy-card rounded-2xl bg-white p-6 shadow-2xl">
-        <p class="text-xs font-semibold uppercase tracking-[0.16em] text-secondary">Privacy Required</p>
-        <h2 id="policy-title" class="mt-2 text-xl font-bold text-ink">Before you continue</h2>
-        <p class="mt-3 text-sm text-secondary">Please review and accept the LoopUp Privacy Policy to continue.</p>
-        <div class="mt-5 flex flex-wrap gap-3">
-          <a href="./privacy.html" class="haptic-tap rounded-full border border-line bg-system px-4 py-2 text-sm font-semibold text-ink transition hover:bg-line">View Privacy Policy</a>
-          <button id="accept-policy" type="button" class="haptic-tap btn-primary text-sm" style="padding:.5rem 1.125rem;">I Accept</button>
-        </div>
+    <div id="mobile-nav" class="mobile-nav" role="dialog" aria-modal="true" aria-label="Site menu">
+      <div class="mobile-nav__backdrop" data-mobile-nav-close></div>
+      <div class="mobile-nav__panel">
+        <button type="button" class="absolute top-4 right-4 p-2" aria-label="Close menu" data-mobile-nav-close>
+          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6l-12 12"/></svg>
+        </button>
+        <a href="./index.html" class="mobile-nav__link" aria-current="page">Home</a>
+        <a href="./updates.html" class="mobile-nav__link">Updates</a>
+        <a href="./about.html" class="mobile-nav__link">About</a>
+        <a href="./contact.html" class="mobile-nav__link">Contact</a>
+        <div class="mt-6"><a href="#" class="haptic-tap btn-primary w-full justify-center">Download</a></div>
       </div>
     </div>
 
-    <script>
-      // ─── Device / year / haptics / policy ───────────────────────────────
-      const isLowPowerDevice = (typeof navigator.hardwareConcurrency === 'number' && navigator.hardwareConcurrency <= 4) ||
-        (typeof navigator.deviceMemory === 'number' && navigator.deviceMemory <= 4);
-      if (isLowPowerDevice) document.documentElement.classList.add('low-motion');
-
-      document.getElementById('year').textContent = new Date().getFullYear();
-
-      const canVibrate = 'vibrate' in navigator && window.matchMedia('(pointer: coarse)').matches;
-      const hap = (p = [8]) => { if (canVibrate) navigator.vibrate(p); };
-      document.querySelectorAll('.haptic-tap').forEach(el => {
-        el.addEventListener('pointerup', () => hap());
-        el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') hap([6]); });
-      });
-
-      const policyKey = 'loopup_policy_accepted_v1';
-      const policyConsent = document.getElementById('policy-consent');
-      const policyBtn = document.getElementById('accept-policy');
-      if (localStorage.getItem(policyKey) !== 'true') { policyConsent.classList.add('active'); document.body.style.overflow = 'hidden'; }
-      policyBtn?.addEventListener('click', () => {
-        localStorage.setItem(policyKey, 'true');
-        policyConsent.classList.remove('active');
-        document.body.style.overflow = '';
-        hap([10]);
-      });
-
-      // ─── Lenis smooth scroll ────────────────────────────────────────────
-      gsap.registerPlugin(ScrollTrigger);
-
-      const lenis = new Lenis({
-        duration: 1.25,
-        easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        smoothTouch: false,
-      });
-      lenis.on('scroll', ScrollTrigger.update);
-      gsap.ticker.add(time => lenis.raf(time * 1000));
-      gsap.ticker.lagSmoothing(0);
-
-      // ─── Animations (skip if reduced motion / low-power) ───────────────
-      const noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches || isLowPowerDevice;
-
-      if (noMotion) {
-        // Instantly reveal everything
-        document.querySelectorAll('.gsap-hidden').forEach(el => el.classList.remove('gsap-hidden'));
-        document.getElementById('phone-a')?.classList.add('phone-float-a');
-        document.getElementById('phone-b')?.classList.add('phone-float-b');
-      } else {
-
-        // ── Hero entrance sequence ─────────────────────────────────────────
-        gsap.set(['#hero-badge', '#hero-title', '#hero-sub', '#hero-ctas', '#hero-social'], { opacity: 0, y: 0 });
-        gsap.set('#hero-phones', { opacity: 0, y: 72 });
-
-        gsap.timeline({ defaults: { ease: 'power3.out' }, delay: 0.08 })
-          .to('#hero-badge',  { opacity: 1, duration: 0.55 })
-          .to('#hero-title',  { opacity: 1, y: 0, duration: 0.9, ease: 'power4.out' }, '-=0.25')
-          .to('#hero-sub',    { opacity: 1, duration: 0.75 }, '-=0.55')
-          .to('#hero-ctas',   { opacity: 1, duration: 0.65 }, '-=0.48')
-          .to('#hero-social', { opacity: 1, duration: 0.55 }, '-=0.38')
-          .to('#hero-phones', { opacity: 1, y: 0, duration: 1.15, ease: 'power4.out' }, '-=0.52')
-          .call(() => {
-            // Hand off to CSS float animation once entrance is done
-            gsap.set(['#phone-a', '#phone-b'], { clearProps: 'transform' });
-            document.getElementById('phone-a')?.classList.add('phone-float-a');
-            document.getElementById('phone-b')?.classList.add('phone-float-b');
-          });
-
-        // ── Features section ───────────────────────────────────────────────
-        gsap.from('.feat-header', {
-          opacity: 0, y: 32, duration: 0.9, ease: 'power3.out',
-          scrollTrigger: { trigger: '.feat-header', start: 'top 82%', once: true },
-        });
-        gsap.from('.feature-card', {
-          opacity: 0, y: 44, duration: 0.85, ease: 'power3.out', stagger: 0.11,
-          clearProps: 'transform',
-          scrollTrigger: { trigger: '.features-grid', start: 'top 76%', once: true },
-        });
-
-        // ── How it works ───────────────────────────────────────────────────
-        gsap.from('.steps-header', {
-          opacity: 0, y: 32, duration: 0.9, ease: 'power3.out',
-          scrollTrigger: { trigger: '.steps-header', start: 'top 82%', once: true },
-        });
-        // Connector line draws left-to-right
-        gsap.fromTo('#steps-line',
-          { scaleX: 0, transformOrigin: 'left center' },
-          { scaleX: 1, duration: 0.85, ease: 'power2.inOut',
-            scrollTrigger: { trigger: '.steps-grid', start: 'top 72%', once: true } }
-        );
-        gsap.from('.step-item', {
-          opacity: 0, y: 36, duration: 0.85, ease: 'power3.out', stagger: 0.13,
-          clearProps: 'transform',
-          scrollTrigger: { trigger: '.steps-grid', start: 'top 72%', once: true },
-        });
-
-        // ── Updates callout ────────────────────────────────────────────────
-        gsap.from('.callout-card', {
-          opacity: 0, y: 48, scale: 0.975, duration: 1.0, ease: 'power3.out', transformOrigin: 'center bottom',
-          clearProps: 'transform,scale',
-          scrollTrigger: { trigger: '.callout-card', start: 'top 80%', once: true },
-        });
-
-        // ── Final CTA ──────────────────────────────────────────────────────
-        gsap.from('.cta-final', {
-          opacity: 0, y: 44, duration: 0.95, ease: 'power3.out',
-          scrollTrigger: { trigger: '.cta-final', start: 'top 82%', once: true },
-        });
-
-      }
-    </script>
+    <script src="./assets/site.js" defer></script>
   </body>
 </html>

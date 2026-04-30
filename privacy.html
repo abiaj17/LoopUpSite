@@ -6,13 +6,12 @@
     <title>LoopUp Privacy Policy</title>
     <meta name="description" content="LoopUp Privacy Policy describing what data we collect, how we use it, and user rights." />
     <link rel="canonical" href="https://loopup.app/privacy.html" />
+    <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Nunito:wght@800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./assets/site.css" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
     <script>
       tailwind.config = {
         theme: {
@@ -25,22 +24,7 @@
       };
     </script>
     <style>
-      :root { --spring-ease:cubic-bezier(0.22,1,0.36,1); --ui-fast:200ms; }
-      html { scroll-behavior:smooth; }
-      .site-nav { background:rgba(255,255,255,0.82); backdrop-filter:saturate(180%) blur(20px); -webkit-backdrop-filter:saturate(180%) blur(20px); border-bottom:1px solid rgba(0,0,0,0.1); }
-      .logo-wordmark { font-family:'Nunito',system-ui,sans-serif; font-size:1.625rem; font-weight:900; letter-spacing:-0.01em; line-height:1; color:#ff5c47; text-decoration:none; position:relative; display:inline-block; }
-      .logo-wordmark::after { content:""; position:absolute; bottom:-3px; left:50%; transform:translateX(-50%); width:36%; height:2.5px; border-radius:9999px; background:#ff5c47; opacity:.5; }
-      .skip-link { position:absolute; left:1rem; top:-3rem; z-index:50; border-radius:9999px; background:#ff5c47; color:#fff; padding:.5rem .9rem; font-size:.875rem; transition:top 200ms ease; }
-      .skip-link:focus { top:1rem; }
-      a:focus-visible,button:focus-visible { outline:2px solid rgba(255,92,71,.7); outline-offset:3px; }
-      .reveal { opacity:0; transform:translate3d(0,28px,0); will-change:transform,opacity; transition:transform 750ms var(--spring-ease),opacity 750ms var(--spring-ease); transition-delay:var(--reveal-delay,0ms); }
-      .reveal.in { opacity:1; transform:translate3d(0,0,0); }
-      .btn-primary { position:relative; overflow:hidden; background:#ff5c47; color:#fff; border-radius:9999px; font-size:.9375rem; font-weight:600; padding:.75rem 1.625rem; display:inline-flex; align-items:center; gap:.625rem; transition:background var(--ui-fast) ease,box-shadow var(--ui-fast) ease,transform var(--ui-fast) ease; box-shadow:0 4px 18px rgba(255,92,71,.28); }
-      .btn-primary:hover { background:#f04f3a; box-shadow:0 8px 28px rgba(255,92,71,.36); transform:translateY(-1px); }
-      .btn-secondary { display:inline-flex; align-items:center; gap:.625rem; border-radius:9999px; border:1px solid rgba(0,0,0,.14); background:transparent; color:#1d1d1f; font-size:.9375rem; font-weight:600; padding:.75rem 1.625rem; transition:background var(--ui-fast) ease; }
-      .btn-secondary:hover { background:rgba(0,0,0,.04); }
-      @media (prefers-reduced-motion:reduce) { .reveal { transition:none!important; } }
-      html.low-motion .reveal { transition-duration:350ms!important; }
+      html { scroll-behavior: smooth; }
     </style>
   </head>
   <body class="bg-white font-sans text-ink antialiased">
@@ -56,7 +40,10 @@
           <a href="./contact.html" class="haptic-tap rounded-full px-3.5 py-1.5 font-medium text-secondary transition hover:bg-black/[0.05] hover:text-ink">Contact</a>
           <a href="./privacy.html" aria-current="page" class="haptic-tap rounded-full px-3.5 py-1.5 font-medium text-ink transition hover:bg-black/[0.05]">Privacy</a>
         </nav>
-        <a href="#" class="haptic-tap btn-primary text-sm">Download</a>
+        <a href="#" class="haptic-tap btn-primary hidden text-sm md:inline-flex">Download</a>
+        <button type="button" class="nav-toggle haptic-tap rounded-xl border border-line p-2" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
       </div>
     </header>
 
@@ -66,8 +53,8 @@
       <section class="bg-white px-6 py-24 text-center md:py-32">
         <div class="mx-auto max-w-3xl">
           <p class="reveal mb-4 text-sm font-semibold tracking-wide text-[#ff5c47]">Legal</p>
-          <h1 class="reveal text-[2.75rem] font-extrabold leading-[1.05] tracking-[-0.04em] text-ink md:text-[4rem]">Privacy Policy</h1>
-          <p class="reveal mt-5 text-base text-secondary">Effective date: April 29, 2026</p>
+          <h1 class="reveal text-[2.75rem] font-extrabold leading-[1.05] tracking-[-0.04em] text-ink md:text-[4rem]" style="--reveal-delay: 80ms">Privacy Policy</h1>
+          <p class="reveal mt-5 text-base text-secondary" style="--reveal-delay: 160ms">Effective date: April 29, 2026</p>
         </div>
       </section>
 
@@ -133,29 +120,25 @@
       </div>
     </footer>
 
-    <script>
-      document.getElementById("year").textContent=new Date().getFullYear();
-      const canVibrate="vibrate" in navigator&&window.matchMedia("(pointer: coarse)").matches;
-      const hap=(p=[8])=>{if(canVibrate)navigator.vibrate(p);};
-      document.querySelectorAll(".haptic-tap").forEach(el=>{el.addEventListener("pointerup",()=>hap());});
-      document.getElementById("accept-policy")?.addEventListener("click",()=>{localStorage.setItem("loopup_policy_accepted_v1","true");hap([10]);});
+    <div id="mobile-nav" class="mobile-nav" role="dialog" aria-modal="true" aria-label="Site menu">
+      <div class="mobile-nav__backdrop" data-mobile-nav-close></div>
+      <div class="mobile-nav__panel">
+        <button type="button" class="absolute top-4 right-4 p-2" aria-label="Close menu" data-mobile-nav-close>
+          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6l-12 12"/></svg>
+        </button>
+        <a href="./index.html" class="mobile-nav__link">Home</a>
+        <a href="./updates.html" class="mobile-nav__link">Updates</a>
+        <a href="./about.html" class="mobile-nav__link">About</a>
+        <a href="./contact.html" class="mobile-nav__link">Contact</a>
+        <div class="mt-6"><a href="#" class="haptic-tap btn-primary w-full justify-center">Download</a></div>
+      </div>
+    </div>
 
-      // ─── Lenis + GSAP ScrollTrigger ──────────────────────────────────────
-      gsap.registerPlugin(ScrollTrigger);
-      const lenis=new Lenis({duration:1.25,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)),smoothTouch:false});
-      lenis.on('scroll',ScrollTrigger.update);
-      gsap.ticker.add(time=>lenis.raf(time*1000));
-      gsap.ticker.lagSmoothing(0);
-      if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-        gsap.utils.toArray('.reveal').forEach(el=>{
-          gsap.from(el,{opacity:0,y:36,duration:0.85,ease:'power3.out',
-            clearProps:'transform',
-            scrollTrigger:{trigger:el,start:'top 84%',once:true}});
-        });
-        ScrollTrigger.refresh();
-      }else{
-        document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in'));
-      }
+    <script src="./assets/site.js" defer></script>
+    <script>
+      document.getElementById('accept-policy')?.addEventListener('click', () => {
+        localStorage.setItem('loopup_policy_accepted_v1', 'true');
+      });
     </script>
   </body>
 </html>
