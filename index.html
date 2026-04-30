@@ -4,569 +4,560 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>LoopUp | Private Family and Friends Group App</title>
-    <meta
-      name="description"
-      content="LoopUp is a private group app for families and friends to Plan, Play, and Share in one place. Stay connected with shared events, mini-games, and memory updates."
-    />
-    <meta
-      name="keywords"
-      content="LoopUp app, family app, private group app, friends planning app, shared calendar app, mini games, memory wall"
-    />
+    <meta name="description" content="LoopUp is a private group app for families and friends to Plan, Play, and Share in one place." />
+    <meta name="keywords" content="LoopUp app, family app, private group app, friends planning app, shared calendar app, mini games, memory wall" />
     <meta name="author" content="LoopUp" />
     <meta property="og:title" content="LoopUp | Plan, Play, Share" />
-    <meta
-      property="og:description"
-      content="One private space for families and close friends to coordinate plans, play together, and share memories."
-    />
+    <meta property="og:description" content="One private space for families and close friends to coordinate plans, play together, and share memories." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://loopup.app/" />
     <meta property="og:image" content="https://loopup.app/og-image.jpg" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="LoopUp | Plan, Play, Share" />
-    <meta
-      name="twitter:description"
-      content="Private group app for families and friends to coordinate and stay connected."
-    />
+    <meta name="twitter:description" content="Private group app for families and friends to coordinate and stay connected." />
     <link rel="canonical" href="https://loopup.app/" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Nunito:wght@800;900&display=swap" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
     <script>
       tailwind.config = {
         theme: {
-          borderRadius: {
-            none: "0",
-            sm: "0.125rem",
-            DEFAULT: "1rem",
-            md: "1rem",
-            lg: "1rem",
-            xl: "1rem",
-            "2xl": "1rem",
-            full: "9999px"
-          },
+          borderRadius: { none:"0",sm:"2px",DEFAULT:"12px",md:"12px",lg:"16px",xl:"20px","2xl":"24px",full:"9999px" },
           extend: {
-            fontFamily: {
-              sans: ["SF Pro Display", "SF Pro Text", "Inter", "system-ui", "sans-serif"]
-            },
-            colors: {
-              ink: "#000000",
-              paper: "#ffffff",
-              system: "#f5f5f7",
-              secondary: "#000000",
-              line: "#d2d2d7",
-              accent: "#ff2d55"
-            }
+            fontFamily: { sans:["SF Pro Display","SF Pro Text","Inter","system-ui","sans-serif"] },
+            colors: { ink:"#1d1d1f",secondary:"#6e6e73",line:"#d2d2d7",system:"#f5f5f7",paper:"#ffffff",accent:"#ff5c47" }
           }
         }
       };
     </script>
     <style>
-      :root {
-        --spring-ease: cubic-bezier(0.22, 1, 0.36, 1);
-        --ui-fast: 220ms;
-        --ui-med: 520ms;
-      }
-      html {
-        scroll-behavior: smooth;
+      :root { --spring-ease:cubic-bezier(0.22,1,0.36,1); --ui-fast:200ms; --ui-med:480ms; }
+      /* scroll-behavior handled by Lenis */
+
+      /* ── Nav ── */
+      .site-nav {
+        background: rgba(255,255,255,0.82);
+        backdrop-filter: saturate(180%) blur(20px);
+        -webkit-backdrop-filter: saturate(180%) blur(20px);
+        border-bottom: 1px solid rgba(0,0,0,0.1);
       }
 
-      .glass {
-        position: relative;
-        overflow: hidden;
-        background: linear-gradient(140deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.34) 48%, rgba(255, 196, 228, 0.2) 100%);
-        border: 1px solid rgba(255, 255, 255, 0.62);
-        backdrop-filter: blur(34px) saturate(180%) brightness(1.08);
-        -webkit-backdrop-filter: blur(34px) saturate(180%) brightness(1.08);
-        box-shadow:
-          inset 0 1px 0 rgba(255, 255, 255, 0.96),
-          inset 0 -1px 0 rgba(255, 255, 255, 0.36),
-          0 20px 45px rgba(255, 45, 85, 0.16),
-          0 35px 90px rgba(23, 29, 48, 0.16);
-      }
-      .glass::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background:
-          radial-gradient(circle at 18% 12%, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0) 38%),
-          radial-gradient(circle at 82% 82%, rgba(255, 140, 190, 0.32) 0%, rgba(255, 140, 190, 0) 44%),
-          linear-gradient(120deg, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0.42) 48%, rgba(255, 255, 255, 0) 76%);
-        background-size: 100% 100%, 100% 100%, 240% 240%;
-        animation: sheenMove 7s linear infinite;
-        pointer-events: none;
-      }
-      .glass::after {
-        content: "";
-        position: absolute;
-        inset: 1px;
-        border-radius: inherit;
-        border: 1px solid rgba(255, 255, 255, 0.5);
-        background: linear-gradient(180deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
-        mix-blend-mode: screen;
-        pointer-events: none;
-      }
-
-      .glass-soft {
-        position: relative;
-        overflow: hidden;
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.86) 0%, rgba(255, 196, 223, 0.58) 100%);
-        border: 1px solid rgba(255, 128, 176, 0.56);
-        backdrop-filter: blur(20px) saturate(155%);
-        -webkit-backdrop-filter: blur(20px) saturate(155%);
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 12px 28px rgba(255, 45, 85, 0.2);
-      }
-      .emboss {
-        border: 1px solid rgba(210, 215, 225, 0.7);
-        background: rgba(255, 255, 255, 0.35);
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95), 0 20px 45px rgba(120, 130, 160, 0.12);
-      }
-      .phone-float {
-        position: relative;
-        transform: translateY(0) rotate(-6deg);
-        animation: phoneRise 5.5s ease-in-out infinite alternate;
-      }
-      .phone-float::after {
-        content: "";
-        position: absolute;
-        left: 50%;
-        bottom: -1.2rem;
-        width: 74%;
-        height: 1.2rem;
-        transform: translateX(-50%);
-        border-radius: 9999px;
-        background: radial-gradient(ellipse at center, rgba(24, 32, 58, 0.24) 0%, rgba(24, 32, 58, 0.06) 58%, rgba(24, 32, 58, 0) 100%);
-        filter: blur(6px);
-        animation: phoneShadow 5.5s ease-in-out infinite alternate;
-      }
-      @keyframes phoneRise {
-        from { transform: translateY(10px) rotate(-4deg); }
-        to { transform: translateY(-12px) rotate(-2deg); }
-      }
-      @keyframes phoneShadow {
-        from { opacity: 0.42; transform: translateX(-50%) scale(0.95); }
-        to { opacity: 0.24; transform: translateX(-50%) scale(1.08); }
-      }
-      .phone-shell {
-        position: relative;
-        width: min(100%, 33rem);
-        margin-inline: auto;
-        border-radius: 2rem;
-        border: 1px solid rgba(35, 44, 70, 0.75);
-        background: linear-gradient(170deg, rgba(18, 24, 38, 0.97) 0%, rgba(12, 16, 28, 0.98) 100%);
-        box-shadow: 0 32px 60px rgba(17, 22, 36, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.06);
-        padding: 0.45rem;
-      }
-      .phone-screen {
-        border-radius: 1.6rem;
-        overflow: hidden;
-        background: radial-gradient(circle at 16% 18%, #ffb6d2 0%, #ff5ea4 34%, #ff3f89 74%, #ff8fc3 100%);
-        min-height: 18.2rem;
-        position: relative;
-      }
-      .phone-notch {
-        position: absolute;
-        top: 0.5rem;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 18%;
-        height: 0.7rem;
-        border-radius: 999px;
-        background: rgba(10, 10, 14, 0.88);
-      }
-      .demo-chip {
-        background: rgba(255, 255, 255, 0.2);
-        border: 1px solid rgba(255, 255, 255, 0.45);
-        backdrop-filter: blur(12px);
-      }
-
-      .lift {
-        transform: perspective(1100px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translate3d(0, 0, 0);
-        will-change: transform, box-shadow;
-        backface-visibility: hidden;
-        transition: transform var(--ui-med) var(--spring-ease), box-shadow var(--ui-med) var(--spring-ease), border-color var(--ui-med) var(--spring-ease);
-      }
-
-      .lift:hover {
-        transform: perspective(1100px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translate3d(0, -8px, 0) scale(1.015);
-        box-shadow: 0 26px 62px rgba(0, 0, 0, 0.14);
-        border-color: rgba(255, 45, 85, 0.35);
-      }
-      @keyframes sheenMove {
-        0% { background-position: 0% 0%, 0% 0%, 0% 50%; }
-        100% { background-position: 0% 0%, 0% 0%, 100% 50%; }
-      }
-
-      .reveal {
-        opacity: 0;
-        transform: translate3d(0, 20px, 0);
-        will-change: transform, opacity;
-        transition: transform 950ms var(--spring-ease), opacity 950ms var(--spring-ease);
-        transition-delay: var(--reveal-delay, 0ms);
-      }
-
-      .reveal.in {
-        opacity: 1;
-        transform: translate3d(0, 0, 0);
-      }
-      .skip-link {
-        position: absolute;
-        left: 1rem;
-        top: -3rem;
-        z-index: 50;
-        border-radius: 9999px;
-        background: #ff2d55;
-        color: #fff;
-        padding: 0.5rem 0.9rem;
-        font-size: 0.875rem;
-        transition: top 250ms ease;
-      }
-      .skip-link:focus {
-        top: 1rem;
-      }
-      a:focus-visible {
-        outline: 2px solid rgba(255, 45, 85, 0.75);
-        outline-offset: 3px;
-      }
-      @media (prefers-reduced-motion: reduce) {
-        .lift,
-        .reveal,
-        .phone-float,
-        .phone-float::after {
-          transition: none !important;
-          animation: none !important;
-        }
-        .glass::before {
-          animation: none !important;
-        }
-        .lift:hover {
-          transform: none;
-        }
-      }
-
+      /* ── Logo ── */
       .logo-wordmark {
-        font-size: 1.85rem;
-        font-weight: 800;
-        letter-spacing: -0.03em;
-        line-height: 1;
-        background: linear-gradient(135deg, #ff2d55 0%, #ff7fb2 100%);
-        color: transparent;
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-stroke: 1px rgba(255, 45, 85, 0.32);
-        text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7), 0 10px 24px rgba(255, 45, 85, 0.18);
+        font-family:'Nunito',system-ui,sans-serif;
+        font-size:1.625rem;
+        font-weight:900;
+        letter-spacing:-0.01em;
+        line-height:1;
+        color:#ff5c47;
+        text-decoration:none;
+        position:relative;
+        display:inline-block;
       }
-      .mesh-overlay {
-        position: fixed;
-        inset: 0;
-        z-index: 0;
-        pointer-events: none;
-        background-image: radial-gradient(rgba(255, 255, 255, 0.2) 0.7px, transparent 0.7px);
-        background-size: 3px 3px;
-        opacity: 0.18;
-        mix-blend-mode: soft-light;
+      .logo-wordmark::after {
+        content:"";
+        position:absolute;
+        bottom:-3px;
+        left:50%;
+        transform:translateX(-50%);
+        width:36%;
+        height:2.5px;
+        border-radius:9999px;
+        background:#ff5c47;
+        opacity:0.5;
       }
-      .cta-primary {
-        position: relative;
+
+      /* ── Skip link ── */
+      .skip-link { position:absolute; left:1rem; top:-3rem; z-index:50; border-radius:9999px; background:#ff5c47; color:#fff; padding:.5rem .9rem; font-size:.875rem; transition:top 200ms ease; }
+      .skip-link:focus { top:1rem; }
+      a:focus-visible { outline:2px solid rgba(255,92,71,.7); outline-offset:3px; }
+
+      /* ── Scroll reveal (fallback for no-JS) — GSAP handles transitions ── */
+      .gsap-hidden { opacity:0; }
+
+      /* ── Phone shell ── */
+      .iphone-shell {
+        position:relative;
+        width:255px;
+        border-radius:52px;
+        background:linear-gradient(170deg,#1c1c1e,#111113);
+        border:9px solid #1a1a1c;
+        overflow:hidden;
+        box-shadow:
+          inset 0 0 0 1px rgba(255,255,255,.07),
+          inset 0 1px 0 rgba(255,255,255,.1),
+          0 50px 100px rgba(0,0,0,.22),
+          0 20px 40px rgba(0,0,0,.1);
       }
-      .cta-primary::after {
-        content: "";
-        position: absolute;
-        inset: -2px;
-        z-index: -1;
-        border-radius: inherit;
-        background: radial-gradient(circle at 30% 30%, rgba(255, 149, 193, 0.5), rgba(255, 45, 85, 0));
-        opacity: 0;
-        transition: opacity var(--ui-fast) ease;
+      .iphone-island {
+        position:absolute;
+        top:12px;
+        left:50%;
+        transform:translateX(-50%);
+        width:86px;
+        height:25px;
+        background:#060606;
+        border-radius:999px;
+        z-index:10;
+        pointer-events:none;
       }
-      .cta-primary:hover::after {
-        opacity: 1;
+      .iphone-screen-img {
+        width:100%;
+        height:auto;
+        display:block;
+        border-radius:43px;
+        image-rendering:-webkit-optimize-contrast;
+        image-rendering:crisp-edges;
       }
-      .policy-backdrop {
-        position: fixed;
-        inset: 0;
-        z-index: 60;
-        display: none;
-        align-items: center;
-        justify-content: center;
-        padding: 1rem;
-        background: rgba(9, 10, 14, 0.58);
-        backdrop-filter: blur(6px);
+
+      /* ── Phone float ── */
+      .phone-float-a { animation:phoneFloatA 7s ease-in-out infinite alternate; }
+      .phone-float-b { animation:phoneFloatB 7s ease-in-out infinite alternate; animation-delay:-3.5s; }
+      @keyframes phoneFloatA { from{transform:translateY(0)} to{transform:translateY(-20px)} }
+      @keyframes phoneFloatB { from{transform:translateY(0)} to{transform:translateY(-14px)} }
+
+      /* ── Feature card ── */
+      .feature-card {
+        background:#fff;
+        border:1px solid rgba(0,0,0,.06);
+        transition:box-shadow var(--ui-med) var(--spring-ease),transform var(--ui-med) var(--spring-ease);
       }
-      .policy-backdrop.active {
-        display: flex;
+      .feature-card:hover {
+        box-shadow:0 12px 40px rgba(0,0,0,.08);
+        transform:translateY(-3px);
       }
-      .policy-card {
-        width: min(100%, 34rem);
+
+      /* ── CTA primary shimmer ── */
+      @keyframes shimmerSlide { 0%{transform:translateX(-100%) skewX(-12deg)} 100%{transform:translateX(220%) skewX(-12deg)} }
+      .btn-primary {
+        position:relative;
+        overflow:hidden;
+        background:#ff5c47;
+        color:#fff;
+        border-radius:9999px;
+        font-size:.9375rem;
+        font-weight:600;
+        padding:.75rem 1.625rem;
+        display:inline-flex;
+        align-items:center;
+        gap:.625rem;
+        transition:background var(--ui-fast) ease,box-shadow var(--ui-fast) ease,transform var(--ui-fast) ease;
+        box-shadow:0 4px 18px rgba(255,92,71,.28);
       }
-      html.low-motion .glass {
-        backdrop-filter: blur(22px) saturate(150%) brightness(1.02);
-        -webkit-backdrop-filter: blur(22px) saturate(150%) brightness(1.02);
+      .btn-primary:hover { background:#f04f3a; box-shadow:0 8px 28px rgba(255,92,71,.36); transform:translateY(-1px); }
+      .btn-primary:active { transform:scale(.98); }
+      .btn-primary::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent); transform:translateX(-100%) skewX(-12deg); }
+      .btn-primary:hover::after { animation:shimmerSlide .55s ease forwards; }
+
+      .btn-secondary {
+        display:inline-flex;
+        align-items:center;
+        gap:.625rem;
+        border-radius:9999px;
+        border:1px solid rgba(0,0,0,.14);
+        background:transparent;
+        color:#1d1d1f;
+        font-size:.9375rem;
+        font-weight:600;
+        padding:.75rem 1.625rem;
+        transition:background var(--ui-fast) ease,border-color var(--ui-fast) ease;
       }
-      html.low-motion .glass::before {
-        animation-duration: 14s;
-        opacity: 0.72;
+      .btn-secondary:hover { background:rgba(0,0,0,.04); border-color:rgba(0,0,0,.22); }
+
+      /* ── Policy backdrop ── */
+      .policy-backdrop { position:fixed; inset:0; z-index:60; display:none; align-items:center; justify-content:center; padding:1rem; background:rgba(0,0,0,.48); backdrop-filter:blur(10px); }
+      .policy-backdrop.active { display:flex; }
+      .policy-card { width:min(100%,34rem); }
+
+      /* ── Reduced motion ── */
+      @media (prefers-reduced-motion:reduce) {
+        .phone-float-a,.phone-float-b,.btn-primary::after { animation:none!important; }
+        .feature-card:hover { transform:none; }
       }
-      html.low-motion .mesh-overlay {
-        opacity: 0.1;
-      }
-      html.low-motion .lift,
-      html.low-motion .reveal {
-        transition-duration: 360ms !important;
-      }
+      html.low-motion .phone-float-a,
+      html.low-motion .phone-float-b { animation-duration:13s; }
     </style>
   </head>
-  <body class="bg-gradient-to-b from-[#f2f3f7] via-[#f5f6fa] to-[#eef0f5] font-sans text-ink antialiased">
+  <body class="bg-white font-sans text-ink antialiased">
     <a href="#main-content" class="skip-link">Skip to content</a>
-    <div class="mesh-overlay"></div>
-    <div class="pointer-events-none fixed inset-x-0 top-0 z-0 mx-auto h-80 max-w-6xl bg-gradient-to-b from-white/65 via-white/20 to-transparent blur-3xl"></div>
-    <div class="pointer-events-none fixed -left-24 top-20 z-0 h-80 w-80 rounded-full bg-pink-300/30 blur-3xl"></div>
-    <div class="pointer-events-none fixed -right-24 top-44 z-0 h-96 w-96 rounded-full bg-rose-300/30 blur-3xl"></div>
-    <header class="glass sticky top-0 z-20 border-b border-line bg-white/70 backdrop-blur-md">
-      <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+
+    <!-- ══ HEADER ══ -->
+    <header class="site-nav sticky top-0 z-20">
+      <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-3.5">
         <a href="./index.html" class="logo-wordmark">LoopUp</a>
-        <nav class="flex items-center gap-6 text-sm text-secondary">
-          <a href="./index.html" aria-current="page" class="haptic-tap rounded-full px-3 py-1.5 text-ink transition hover:bg-white">Home</a>
-          <a href="./updates.html" class="haptic-tap rounded-full px-3 py-1.5 transition hover:bg-white hover:text-ink">Updates</a>
-          <a href="./about.html" class="haptic-tap rounded-full px-3 py-1.5 transition hover:bg-white hover:text-ink">About</a>
-          <a href="./contact.html" class="haptic-tap rounded-full px-3 py-1.5 transition hover:bg-white hover:text-ink">Contact</a>
+        <nav class="hidden items-center gap-0.5 text-sm md:flex" aria-label="Main">
+          <a href="./index.html" aria-current="page" class="haptic-tap rounded-full px-3.5 py-1.5 font-medium text-ink transition hover:bg-black/[0.05]">Home</a>
+          <a href="./updates.html" class="haptic-tap rounded-full px-3.5 py-1.5 font-medium text-secondary transition hover:bg-black/[0.05] hover:text-ink">Updates</a>
+          <a href="./about.html" class="haptic-tap rounded-full px-3.5 py-1.5 font-medium text-secondary transition hover:bg-black/[0.05] hover:text-ink">About</a>
+          <a href="./contact.html" class="haptic-tap rounded-full px-3.5 py-1.5 font-medium text-secondary transition hover:bg-black/[0.05] hover:text-ink">Contact</a>
         </nav>
+        <a href="#" class="haptic-tap btn-primary text-sm">Download</a>
       </div>
     </header>
 
-    <main id="main-content" class="relative z-10">
-      <section class="mx-auto grid min-h-[72vh] max-w-6xl items-center gap-10 px-6 py-28 md:min-h-[78vh] md:grid-cols-2 md:py-36 reveal">
-        <div>
-          <p class="glass-soft mb-6 inline-flex rounded-full px-4 py-2 text-xs font-medium text-secondary">
-            Private group app for families and friends
-          </p>
-          <h1 class="max-w-4xl text-5xl font-bold tracking-tight md:text-7xl">
-            Plan together, play together, and share what matters.
-          </h1>
-          <p class="mt-8 max-w-3xl text-xl text-secondary">
-            LoopUp combines planning, mini-games, and shared memories in one simple space designed for real groups who want to stay connected.
-          </p>
-          <div class="mt-8 flex flex-wrap gap-4">
-            <a href="./updates.html" class="haptic-tap cta-primary lift rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90">
-              See Product Updates
-            </a>
-            <a href="./about.html" class="haptic-tap glass-soft lift rounded-full px-6 py-3 text-sm font-semibold text-ink shadow-sm transition hover:bg-pink-50/80">
-              Learn About LoopUp
-            </a>
-          </div>
+    <main id="main-content">
+
+      <!-- ══ HERO ══ -->
+      <section class="overflow-hidden bg-white px-6 pb-0 pt-24 text-center md:pt-32">
+        <!-- Eyebrow -->
+        <div id="hero-badge" class="gsap-hidden mb-6 inline-flex items-center gap-2 rounded-full bg-[#fff0ee] px-4 py-1.5 text-xs font-semibold text-[#ff5c47]">
+          <span class="h-1.5 w-1.5 rounded-full bg-[#ff5c47]"></span>
+          Now available · iOS &amp; Android · Free to download
         </div>
-        <aside class="emboss relative rounded-[2rem] p-6 md:p-8">
-          <div class="absolute -left-10 -top-10 h-32 w-32 rounded-[2rem] border border-white/70"></div>
-          <div class="phone-float">
-            <div class="phone-shell">
-              <div class="phone-screen p-5 md:p-6">
-                <div class="phone-notch"></div>
-                <p class="mt-4 text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-white/80">LoopUp Live Demo</p>
-                <div class="mt-3 grid grid-cols-[1.2fr_0.8fr] gap-4">
-                  <div>
-                    <h3 class="text-2xl font-semibold tracking-tight text-white">Family Weekend Plan</h3>
-                    <div class="mt-4 space-y-2.5">
-                      <div class="demo-chip rounded-xl p-2.5 text-xs text-white">Saturday 10:00 AM - Brunch RSVP: 5/6</div>
-                      <div class="demo-chip rounded-xl p-2.5 text-xs text-white">Photo Challenge is live in Play mode</div>
-                      <div class="demo-chip rounded-xl p-2.5 text-xs text-white">3 new memory posts from your group</div>
-                    </div>
-                  </div>
-                  <div class="glass-soft rounded-2xl p-3">
-                    <p class="text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-secondary">Today</p>
-                    <p class="mt-1 text-2xl font-semibold tracking-tight text-ink">8:30</p>
-                    <p class="text-xs text-secondary">Family sync in 30m</p>
-                    <div class="mt-3 space-y-2">
-                      <div class="rounded-lg bg-white/70 px-2 py-1 text-[0.68rem] text-secondary">Plan</div>
-                      <div class="rounded-lg bg-white/70 px-2 py-1 text-[0.68rem] text-secondary">Play</div>
-                      <div class="rounded-lg bg-white/70 px-2 py-1 text-[0.68rem] text-secondary">Share</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="mt-3 grid grid-cols-3 gap-2 text-center text-[0.68rem] font-medium text-white/90">
-                  <div class="demo-chip rounded-lg py-1.5">Plan</div>
-                  <div class="demo-chip rounded-lg py-1.5">Play</div>
-                  <div class="demo-chip rounded-lg py-1.5">Share</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </aside>
-      </section>
-      <section class="mx-auto max-w-6xl px-6 pb-6">
-        <div class="emboss h-px w-full"></div>
-      </section>
 
-      <section class="mx-auto max-w-6xl px-6 py-16 reveal">
-        <div class="glass rounded-2xl p-7 md:p-10">
-          <p class="text-xs font-semibold uppercase tracking-[0.18em] text-secondary">Get The App</p>
-          <h2 class="mt-3 max-w-3xl text-3xl font-bold tracking-tight md:text-4xl">Download LoopUp on iOS and Android</h2>
-          <p class="mt-4 max-w-2xl text-sm md:text-base text-secondary">
-            Join families and close friends using LoopUp to plan events, play daily prompts, and save shared memories in one private space.
-          </p>
-          <div class="mt-7 grid gap-4 md:grid-cols-2">
-            <a href="#" class="haptic-tap glass-soft lift rounded-2xl px-5 py-4">
-              <p class="text-xs uppercase tracking-[0.16em] text-secondary">Apple</p>
-              <p class="mt-1 text-lg font-semibold tracking-tight text-ink">Download on the App Store</p>
-              <p class="mt-1 text-xs text-secondary">iPhone and iPad supported</p>
-            </a>
-            <a href="#" class="haptic-tap glass-soft lift rounded-2xl px-5 py-4">
-              <p class="text-xs uppercase tracking-[0.16em] text-secondary">Android</p>
-              <p class="mt-1 text-lg font-semibold tracking-tight text-ink">Get it on Google Play</p>
-              <p class="mt-1 text-xs text-secondary">Phones and tablets supported</p>
-            </a>
-          </div>
-          <div class="mt-5 flex flex-wrap items-center gap-3 text-xs text-secondary">
-            <span class="glass-soft rounded-full px-3 py-1.5">Private groups only</span>
-            <span class="glass-soft rounded-full px-3 py-1.5">Plan - Play - Share in one app</span>
-            <span class="glass-soft rounded-full px-3 py-1.5">Weekly updates and new prompts</span>
-          </div>
-        </div>
-      </section>
+        <!-- Headline -->
+        <h1 id="hero-title" class="gsap-hidden mx-auto max-w-3xl text-[3.25rem] font-extrabold leading-[1.05] tracking-[-0.04em] text-ink md:text-[5.5rem]">
+          Your group's<br />home base.
+        </h1>
 
-      <section class="mx-auto grid max-w-6xl gap-6 px-6 py-24 md:grid-cols-3 reveal">
-        <article class="glass lift rounded-2xl p-8 shadow-sm">
-          <h2 class="text-xl font-bold tracking-tight">Plan</h2>
-          <p class="mt-4 text-sm text-secondary">
-            Shared events, RSVP, reminders, and recurring plans for families and close groups.
-          </p>
-        </article>
-        <article class="glass lift rounded-2xl p-8 shadow-sm">
-          <h2 class="text-xl font-bold tracking-tight">Play</h2>
-          <p class="mt-4 text-sm text-secondary">
-            Daily prompts and mini-games that create fun, lightweight reasons to return weekly.
-          </p>
-        </article>
-        <article class="glass lift rounded-2xl p-8 shadow-sm">
-          <h2 class="text-xl font-bold tracking-tight">Share</h2>
-          <p class="mt-4 text-sm text-secondary">
-            Memory wall for photos, voice notes, and updates that keep moments easy to revisit.
-          </p>
-        </article>
-      </section>
+        <!-- Subtitle -->
+        <p id="hero-sub" class="gsap-hidden mx-auto mt-7 max-w-[30rem] text-lg leading-relaxed text-secondary md:text-xl">
+          Games, plans &amp; shared moments — just for the people you actually care about.
+        </p>
 
-      <section class="reveal px-6 py-20">
-        <div class="glass mx-auto max-w-6xl rounded-2xl px-6 py-24">
-          <h2 class="text-3xl font-bold tracking-tight">What is happening now</h2>
-          <p class="mt-4 max-w-2xl text-secondary">
-            We publish feature releases, roadmap progress, and product notes so your community always knows what is new.
-          </p>
-          <a href="./updates.html" class="haptic-tap lift mt-8 inline-flex rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90">
-            Visit Updates
+        <!-- CTAs -->
+        <div id="hero-ctas" class="gsap-hidden mt-10 flex flex-wrap justify-center gap-3">
+          <a href="#" class="haptic-tap btn-primary">
+            <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            App Store
+          </a>
+          <a href="#" class="haptic-tap btn-secondary">
+            <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" aria-hidden="true"><path fill="#EA4335" d="M5.84 21.17 13.69 12 5.84 2.83A2 2 0 0 0 5 4.5v15a2 2 0 0 0 .84 1.67z"/><path fill="#FBBC05" d="m16.42 9.1-2.6-1.5-3.06 3.4 3.06 3.4 2.63-1.52A2 2 0 0 0 16.42 9.1z"/><path fill="#4285F4" d="m5.84 2.83 7.85 9.17 2.12-2.36-7.27-4.2a2 2 0 0 0-2.7-.61z"/><path fill="#34A853" d="m5.84 21.17a2 2 0 0 0 2.7-.61l7.27-4.2-2.12-2.36z"/></svg>
+            Google Play
           </a>
         </div>
+
+        <!-- Social proof row -->
+        <div id="hero-social" class="gsap-hidden mt-8 flex items-center justify-center gap-5 text-sm text-secondary">
+          <div class="flex items-center gap-2">
+            <div class="flex -space-x-1.5">
+              <div class="h-6 w-6 rounded-full bg-gradient-to-br from-pink-400 to-rose-500 ring-2 ring-white"></div>
+              <div class="h-6 w-6 rounded-full bg-gradient-to-br from-violet-400 to-purple-500 ring-2 ring-white"></div>
+              <div class="h-6 w-6 rounded-full bg-gradient-to-br from-amber-400 to-orange-400 ring-2 ring-white"></div>
+              <div class="h-6 w-6 rounded-full bg-gradient-to-br from-teal-400 to-cyan-500 ring-2 ring-white"></div>
+            </div>
+            <span>Loved by real groups</span>
+          </div>
+          <span class="h-3 w-px bg-line"></span>
+          <div class="flex items-center gap-1.5">
+            <svg class="h-3.5 w-3.5 fill-amber-400" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            5.0 on App Store
+          </div>
+        </div>
+
+        <!-- Phone stage -->
+        <div id="hero-phones" class="gsap-hidden mt-20 flex items-end justify-center gap-8">
+          <div id="phone-a">
+            <div class="iphone-shell">
+              <div class="iphone-island" aria-hidden="true"></div>
+              <img src="./assets/screen-home.png" alt="LoopUp Home screen" class="iphone-screen-img" />
+            </div>
+          </div>
+          <div id="phone-b" class="mt-16 hidden sm:block">
+            <div class="iphone-shell">
+              <div class="iphone-island" aria-hidden="true"></div>
+              <img src="./assets/screen-gameroom.png" alt="LoopUp Game Room screen" class="iphone-screen-img" loading="lazy" />
+            </div>
+          </div>
+        </div>
       </section>
+
+      <!-- ══ FEATURES ══ -->
+      <section class="bg-system px-6 py-28 md:py-36">
+        <div class="mx-auto max-w-6xl">
+          <div class="feat-header mb-16 text-center">
+            <p class="text-sm font-semibold tracking-wide text-[#ff5c47]">Everything your group needs</p>
+            <h2 class="mt-4 text-4xl font-bold tracking-[-0.03em] text-ink md:text-[3.25rem]">One app. Three pillars.</h2>
+            <p class="mx-auto mt-4 max-w-md text-lg text-secondary">Built into one simple, private space — nothing scattered across five different apps.</p>
+          </div>
+          <div class="features-grid grid gap-5 md:grid-cols-3">
+
+            <article class="feature-card rounded-2xl p-8 md:p-10">
+              <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-[#fff0ee]">
+                <svg class="h-5.5 w-5.5 h-6 w-6 text-[#ff5c47]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+              </div>
+              <h3 class="text-2xl font-bold tracking-tight text-ink">Plan</h3>
+              <p class="mt-3 text-base leading-relaxed text-secondary">Shared events, RSVP, reminders, and recurring plans — so the whole group stays in sync.</p>
+              <div class="mt-6 flex flex-wrap gap-2">
+                <span class="rounded-full bg-system px-3 py-1 text-xs font-medium text-secondary">Events</span>
+                <span class="rounded-full bg-system px-3 py-1 text-xs font-medium text-secondary">RSVP</span>
+                <span class="rounded-full bg-system px-3 py-1 text-xs font-medium text-secondary">Reminders</span>
+              </div>
+            </article>
+
+            <article class="feature-card rounded-2xl p-8 md:p-10">
+              <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-[#fff0ee]">
+                <svg class="h-6 w-6 text-[#ff5c47]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/><path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/><path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/><path d="M14 14.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5z"/><path d="M15.5 19H14v1.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z"/><path d="M10 9.5C10 8.67 9.33 8 8.5 8h-5C2.67 8 2 8.67 2 9.5S2.67 11 3.5 11h5c.83 0 1.5-.67 1.5-1.5z"/><path d="M8.5 5H10V3.5C10 2.67 9.33 2 8.5 2S7 2.67 7 3.5 7.67 5 8.5 5z"/></svg>
+              </div>
+              <h3 class="text-2xl font-bold tracking-tight text-ink">Play</h3>
+              <p class="mt-3 text-base leading-relaxed text-secondary">Truth or Dare, Would You Rather, Imposter, Memory Round — built for groups, not strangers.</p>
+              <div class="mt-6 flex flex-wrap gap-2">
+                <span class="rounded-full bg-system px-3 py-1 text-xs font-medium text-secondary">4 games</span>
+                <span class="rounded-full bg-system px-3 py-1 text-xs font-medium text-secondary">Pass &amp; play</span>
+                <span class="rounded-full bg-system px-3 py-1 text-xs font-medium text-secondary">Free</span>
+              </div>
+            </article>
+
+            <article class="feature-card rounded-2xl p-8 md:p-10">
+              <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-[#fff0ee]">
+                <svg class="h-6 w-6 text-[#ff5c47]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              </div>
+              <h3 class="text-2xl font-bold tracking-tight text-ink">Share</h3>
+              <p class="mt-3 text-base leading-relaxed text-secondary">Memory wall for photos, voice notes, and updates — every shared moment, easy to revisit.</p>
+              <div class="mt-6 flex flex-wrap gap-2">
+                <span class="rounded-full bg-system px-3 py-1 text-xs font-medium text-secondary">Photos</span>
+                <span class="rounded-full bg-system px-3 py-1 text-xs font-medium text-secondary">Voice notes</span>
+                <span class="rounded-full bg-system px-3 py-1 text-xs font-medium text-secondary">Updates</span>
+              </div>
+            </article>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ HOW IT WORKS ══ -->
+      <section class="bg-white px-6 py-28 md:py-36">
+        <div class="mx-auto max-w-6xl">
+          <div class="steps-header mb-20 text-center">
+            <p class="text-sm font-semibold tracking-wide text-[#ff5c47]">Simple to start</p>
+            <h2 class="mt-4 text-4xl font-bold tracking-[-0.03em] text-ink md:text-[3.25rem]">Up and running<br />in 60 seconds.</h2>
+          </div>
+          <div class="steps-grid relative grid gap-12 md:grid-cols-3">
+            <div id="steps-line" class="pointer-events-none absolute left-[calc(33.3%+1.5rem)] right-[calc(33.3%+1.5rem)] top-6 hidden h-px origin-left bg-line md:block"></div>
+
+            <div class="step-item text-center">
+              <div class="mx-auto mb-6 flex h-12 w-12 items-center justify-center rounded-full border border-line bg-white text-sm font-bold text-[#ff5c47]">01</div>
+              <h3 class="text-xl font-semibold tracking-tight text-ink">Create a group</h3>
+              <p class="mt-3 text-base leading-relaxed text-secondary">Name it, make it yours. Takes 30 seconds.</p>
+            </div>
+            <div class="step-item text-center">
+              <div class="mx-auto mb-6 flex h-12 w-12 items-center justify-center rounded-full border border-line bg-white text-sm font-bold text-[#ff5c47]">02</div>
+              <h3 class="text-xl font-semibold tracking-tight text-ink">Invite friends</h3>
+              <p class="mt-3 text-base leading-relaxed text-secondary">Share a 6-digit code. No sign-up required for members.</p>
+            </div>
+            <div class="step-item text-center">
+              <div class="mx-auto mb-6 flex h-12 w-12 items-center justify-center rounded-full border border-line bg-white text-sm font-bold text-[#ff5c47]">03</div>
+              <h3 class="text-xl font-semibold tracking-tight text-ink">Play &amp; plan</h3>
+              <p class="mt-3 text-base leading-relaxed text-secondary">Games, events &amp; memories — all in one private space.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ UPDATES CALLOUT ══ -->
+      <section class="bg-system px-6 py-28 md:py-36">
+        <div class="mx-auto max-w-6xl">
+          <div class="callout-card overflow-hidden rounded-3xl bg-white p-12 text-center shadow-sm md:p-20">
+            <p class="text-sm font-semibold tracking-wide text-[#ff5c47]">What's new</p>
+            <h2 class="mx-auto mt-4 max-w-2xl text-3xl font-bold tracking-[-0.03em] text-ink md:text-[2.75rem]">Always improving,<br />always shipping.</h2>
+            <p class="mx-auto mt-5 max-w-md text-lg text-secondary">Feature releases, roadmap progress, and product notes — so your group always knows what's coming.</p>
+            <div class="mt-10">
+              <a href="./updates.html" class="haptic-tap btn-primary">
+                See Product Updates
+                <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ FINAL CTA ══ -->
+      <section class="bg-white px-6 py-28 text-center md:py-40">
+        <div class="mx-auto max-w-6xl">
+          <div class="cta-final">
+            <p class="text-sm font-semibold tracking-wide text-[#ff5c47]">Download now</p>
+            <h2 class="mx-auto mt-5 max-w-2xl text-4xl font-extrabold leading-[1.06] tracking-[-0.04em] text-ink md:text-[4.5rem]">
+              One space for the people you care about.
+            </h2>
+            <p class="mx-auto mt-6 max-w-sm text-lg text-secondary">Free to download. Private by design. Built for real groups.</p>
+            <div class="mt-10 flex flex-wrap justify-center gap-3">
+              <a href="#" class="haptic-tap btn-primary text-base" style="padding:.875rem 2rem;">
+                <svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                Download on App Store
+              </a>
+              <a href="#" class="haptic-tap btn-secondary text-base" style="padding:.875rem 2rem;">
+                <svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" aria-hidden="true"><path fill="#EA4335" d="M5.84 21.17 13.69 12 5.84 2.83A2 2 0 0 0 5 4.5v15a2 2 0 0 0 .84 1.67z"/><path fill="#FBBC05" d="m16.42 9.1-2.6-1.5-3.06 3.4 3.06 3.4 2.63-1.52A2 2 0 0 0 16.42 9.1z"/><path fill="#4285F4" d="m5.84 2.83 7.85 9.17 2.12-2.36-7.27-4.2a2 2 0 0 0-2.7-.61z"/><path fill="#34A853" d="m5.84 21.17a2 2 0 0 0 2.7-.61l7.27-4.2-2.12-2.36z"/></svg>
+                Get on Google Play
+              </a>
+            </div>
+            <div class="mt-8 flex flex-wrap items-center justify-center gap-3 text-sm text-secondary">
+              <span>100% Private</span>
+              <span class="h-3 w-px bg-line"></span>
+              <span>Free to download</span>
+              <span class="h-3 w-px bg-line"></span>
+              <span>iOS &amp; Android</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
     </main>
 
-    <footer class="mx-auto flex max-w-6xl flex-col gap-4 px-6 py-10 text-sm text-secondary md:flex-row md:items-center md:justify-between">
-      <p>© <span id="year"></span> LoopUp. All rights reserved.</p>
-      <div class="flex gap-4">
-        <a href="./updates.html" class="haptic-tap hover:text-ink">Updates</a>
-        <a href="./about.html" class="haptic-tap hover:text-ink">About</a>
-        <a href="./contact.html" class="haptic-tap hover:text-ink">Contact</a>
-        <a href="./privacy.html" class="haptic-tap hover:text-ink">Privacy</a>
+    <!-- ══ FOOTER ══ -->
+    <footer class="border-t border-line bg-system">
+      <div class="mx-auto max-w-6xl px-6 py-16">
+        <div class="grid gap-10 md:grid-cols-[2fr_1fr_1fr]">
+          <div>
+            <a href="./index.html" class="logo-wordmark">LoopUp</a>
+            <p class="mt-4 max-w-xs text-sm text-secondary">One private space for families and close friends to connect, plan, and play.</p>
+            <div class="mt-6 flex flex-wrap gap-3">
+              <a href="#" class="haptic-tap inline-flex items-center gap-2 rounded-xl border border-line bg-white px-4 py-2.5 text-xs font-medium text-secondary transition hover:border-[#d2d2d7] hover:text-ink">
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                App Store
+              </a>
+              <a href="#" class="haptic-tap inline-flex items-center gap-2 rounded-xl border border-line bg-white px-4 py-2.5 text-xs font-medium text-secondary transition hover:text-ink">
+                <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" aria-hidden="true"><path fill="#EA4335" d="M5.84 21.17 13.69 12 5.84 2.83A2 2 0 0 0 5 4.5v15a2 2 0 0 0 .84 1.67z"/><path fill="#FBBC05" d="m16.42 9.1-2.6-1.5-3.06 3.4 3.06 3.4 2.63-1.52A2 2 0 0 0 16.42 9.1z"/><path fill="#4285F4" d="m5.84 2.83 7.85 9.17 2.12-2.36-7.27-4.2a2 2 0 0 0-2.7-.61z"/><path fill="#34A853" d="m5.84 21.17a2 2 0 0 0 2.7-.61l7.27-4.2-2.12-2.36z"/></svg>
+                Google Play
+              </a>
+            </div>
+          </div>
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-[0.16em] text-secondary">Legal</p>
+            <ul class="mt-4 space-y-3">
+              <li><a href="./privacy.html" class="haptic-tap text-sm text-secondary transition hover:text-ink">Privacy Policy</a></li>
+              <li><a href="#" class="haptic-tap text-sm text-secondary transition hover:text-ink">Terms of Use</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-[0.16em] text-secondary">Company</p>
+            <ul class="mt-4 space-y-3">
+              <li><a href="./about.html" class="haptic-tap text-sm text-secondary transition hover:text-ink">About</a></li>
+              <li><a href="./updates.html" class="haptic-tap text-sm text-secondary transition hover:text-ink">Updates</a></li>
+              <li><a href="./contact.html" class="haptic-tap text-sm text-secondary transition hover:text-ink">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="mt-12 border-t border-line pt-8">
+          <p class="text-xs text-secondary">© <span id="year"></span> LoopUp. All rights reserved.</p>
+        </div>
       </div>
     </footer>
+
+    <!-- Policy dialog -->
     <div id="policy-consent" class="policy-backdrop" role="dialog" aria-modal="true" aria-labelledby="policy-title">
-      <div class="policy-card glass rounded-2xl p-6">
+      <div class="policy-card rounded-2xl bg-white p-6 shadow-2xl">
         <p class="text-xs font-semibold uppercase tracking-[0.16em] text-secondary">Privacy Required</p>
-        <h2 id="policy-title" class="mt-2 text-2xl font-bold tracking-tight text-ink">Before you continue</h2>
-        <p class="mt-3 text-sm text-secondary">
-          Please review and accept the LoopUp Privacy Policy to continue using this website experience.
-        </p>
+        <h2 id="policy-title" class="mt-2 text-xl font-bold text-ink">Before you continue</h2>
+        <p class="mt-3 text-sm text-secondary">Please review and accept the LoopUp Privacy Policy to continue.</p>
         <div class="mt-5 flex flex-wrap gap-3">
-          <a href="./privacy.html" class="haptic-tap glass-soft rounded-full px-4 py-2 text-sm font-semibold text-ink">View Privacy Policy</a>
-          <button id="accept-policy" type="button" class="haptic-tap rounded-full bg-accent px-4 py-2 text-sm font-semibold text-white">
-            I Accept
-          </button>
+          <a href="./privacy.html" class="haptic-tap rounded-full border border-line bg-system px-4 py-2 text-sm font-semibold text-ink transition hover:bg-line">View Privacy Policy</a>
+          <button id="accept-policy" type="button" class="haptic-tap btn-primary text-sm" style="padding:.5rem 1.125rem;">I Accept</button>
         </div>
       </div>
     </div>
 
     <script>
-      const isLowPowerDevice =
-        (typeof navigator.hardwareConcurrency === "number" && navigator.hardwareConcurrency <= 4) ||
-        (typeof navigator.deviceMemory === "number" && navigator.deviceMemory <= 4);
-      if (isLowPowerDevice) {
-        document.documentElement.classList.add("low-motion");
-      }
-      document.getElementById("year").textContent = new Date().getFullYear();
-      const revealElements = document.querySelectorAll(".reveal");
-      revealElements.forEach((element, index) => {
-        element.style.setProperty("--reveal-delay", `${index * 90}ms`);
-      });
-      if ("IntersectionObserver" in window) {
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add("in");
-                observer.unobserve(entry.target);
-              }
-            });
-          },
-          { threshold: 0.15, rootMargin: "0px 0px -10% 0px" }
-        );
-        revealElements.forEach((element) => observer.observe(element));
-      } else {
-        revealElements.forEach((element) => element.classList.add("in"));
-      }
-      const prefersFinePointer = window.matchMedia("(pointer: fine)").matches;
-      if (prefersFinePointer && !isLowPowerDevice) {
-        const liftElements = document.querySelectorAll(".lift");
-        liftElements.forEach((element) => {
-          let rafId = null;
-          let targetX = 0;
-          let targetY = 0;
-          element.addEventListener("pointermove", (event) => {
-            const rect = element.getBoundingClientRect();
-            targetX = (event.clientX - rect.left) / rect.width - 0.5;
-            targetY = (event.clientY - rect.top) / rect.height - 0.5;
-            if (rafId) return;
-            rafId = requestAnimationFrame(() => {
-              element.style.setProperty("--ry", `${targetX * 7}deg`);
-              element.style.setProperty("--rx", `${-targetY * 7}deg`);
-              rafId = null;
-            });
-          });
-          element.addEventListener("pointerleave", () => {
-            if (rafId) cancelAnimationFrame(rafId);
-            rafId = null;
-            element.style.setProperty("--ry", "0deg");
-            element.style.setProperty("--rx", "0deg");
-          });
-        });
-      }
-      const canUseHaptics = "vibrate" in navigator && window.matchMedia("(pointer: coarse)").matches;
-      const triggerHapticTap = (pattern = [8]) => {
-        if (!canUseHaptics) return;
-        navigator.vibrate(pattern);
-      };
-      document.querySelectorAll(".haptic-tap").forEach((element) => {
-        element.addEventListener("pointerup", () => triggerHapticTap([8]));
-        element.addEventListener("keydown", (event) => {
-          if (event.key === "Enter" || event.key === " ") {
-            triggerHapticTap([6]);
-          }
-        });
-      });
-      const policyStorageKey = "loopup_policy_accepted_v1";
-      const policyConsent = document.getElementById("policy-consent");
-      const acceptPolicyButton = document.getElementById("accept-policy");
-      const hasAcceptedPolicy = localStorage.getItem(policyStorageKey) === "true";
-      if (!hasAcceptedPolicy) {
-        policyConsent.classList.add("active");
-        document.body.style.overflow = "hidden";
-      }
-      acceptPolicyButton?.addEventListener("click", () => {
-        localStorage.setItem(policyStorageKey, "true");
-        policyConsent.classList.remove("active");
-        document.body.style.overflow = "";
-        triggerHapticTap([10]);
+      // ─── Device / year / haptics / policy ───────────────────────────────
+      const isLowPowerDevice = (typeof navigator.hardwareConcurrency === 'number' && navigator.hardwareConcurrency <= 4) ||
+        (typeof navigator.deviceMemory === 'number' && navigator.deviceMemory <= 4);
+      if (isLowPowerDevice) document.documentElement.classList.add('low-motion');
+
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      const canVibrate = 'vibrate' in navigator && window.matchMedia('(pointer: coarse)').matches;
+      const hap = (p = [8]) => { if (canVibrate) navigator.vibrate(p); };
+      document.querySelectorAll('.haptic-tap').forEach(el => {
+        el.addEventListener('pointerup', () => hap());
+        el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') hap([6]); });
       });
 
+      const policyKey = 'loopup_policy_accepted_v1';
+      const policyConsent = document.getElementById('policy-consent');
+      const policyBtn = document.getElementById('accept-policy');
+      if (localStorage.getItem(policyKey) !== 'true') { policyConsent.classList.add('active'); document.body.style.overflow = 'hidden'; }
+      policyBtn?.addEventListener('click', () => {
+        localStorage.setItem(policyKey, 'true');
+        policyConsent.classList.remove('active');
+        document.body.style.overflow = '';
+        hap([10]);
+      });
+
+      // ─── Lenis smooth scroll ────────────────────────────────────────────
+      gsap.registerPlugin(ScrollTrigger);
+
+      const lenis = new Lenis({
+        duration: 1.25,
+        easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothTouch: false,
+      });
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add(time => lenis.raf(time * 1000));
+      gsap.ticker.lagSmoothing(0);
+
+      // ─── Animations (skip if reduced motion / low-power) ───────────────
+      const noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches || isLowPowerDevice;
+
+      if (noMotion) {
+        // Instantly reveal everything
+        document.querySelectorAll('.gsap-hidden').forEach(el => el.classList.remove('gsap-hidden'));
+        document.getElementById('phone-a')?.classList.add('phone-float-a');
+        document.getElementById('phone-b')?.classList.add('phone-float-b');
+      } else {
+
+        // ── Hero entrance sequence ─────────────────────────────────────────
+        gsap.set(['#hero-badge', '#hero-title', '#hero-sub', '#hero-ctas', '#hero-social'], { opacity: 0, y: 0 });
+        gsap.set('#hero-phones', { opacity: 0, y: 72 });
+
+        gsap.timeline({ defaults: { ease: 'power3.out' }, delay: 0.08 })
+          .to('#hero-badge',  { opacity: 1, duration: 0.55 })
+          .to('#hero-title',  { opacity: 1, y: 0, duration: 0.9, ease: 'power4.out' }, '-=0.25')
+          .to('#hero-sub',    { opacity: 1, duration: 0.75 }, '-=0.55')
+          .to('#hero-ctas',   { opacity: 1, duration: 0.65 }, '-=0.48')
+          .to('#hero-social', { opacity: 1, duration: 0.55 }, '-=0.38')
+          .to('#hero-phones', { opacity: 1, y: 0, duration: 1.15, ease: 'power4.out' }, '-=0.52')
+          .call(() => {
+            // Hand off to CSS float animation once entrance is done
+            gsap.set(['#phone-a', '#phone-b'], { clearProps: 'transform' });
+            document.getElementById('phone-a')?.classList.add('phone-float-a');
+            document.getElementById('phone-b')?.classList.add('phone-float-b');
+          });
+
+        // ── Features section ───────────────────────────────────────────────
+        gsap.from('.feat-header', {
+          opacity: 0, y: 32, duration: 0.9, ease: 'power3.out',
+          scrollTrigger: { trigger: '.feat-header', start: 'top 82%', once: true },
+        });
+        gsap.from('.feature-card', {
+          opacity: 0, y: 44, duration: 0.85, ease: 'power3.out', stagger: 0.11,
+          clearProps: 'transform',
+          scrollTrigger: { trigger: '.features-grid', start: 'top 76%', once: true },
+        });
+
+        // ── How it works ───────────────────────────────────────────────────
+        gsap.from('.steps-header', {
+          opacity: 0, y: 32, duration: 0.9, ease: 'power3.out',
+          scrollTrigger: { trigger: '.steps-header', start: 'top 82%', once: true },
+        });
+        // Connector line draws left-to-right
+        gsap.fromTo('#steps-line',
+          { scaleX: 0, transformOrigin: 'left center' },
+          { scaleX: 1, duration: 0.85, ease: 'power2.inOut',
+            scrollTrigger: { trigger: '.steps-grid', start: 'top 72%', once: true } }
+        );
+        gsap.from('.step-item', {
+          opacity: 0, y: 36, duration: 0.85, ease: 'power3.out', stagger: 0.13,
+          clearProps: 'transform',
+          scrollTrigger: { trigger: '.steps-grid', start: 'top 72%', once: true },
+        });
+
+        // ── Updates callout ────────────────────────────────────────────────
+        gsap.from('.callout-card', {
+          opacity: 0, y: 48, scale: 0.975, duration: 1.0, ease: 'power3.out', transformOrigin: 'center bottom',
+          clearProps: 'transform,scale',
+          scrollTrigger: { trigger: '.callout-card', start: 'top 80%', once: true },
+        });
+
+        // ── Final CTA ──────────────────────────────────────────────────────
+        gsap.from('.cta-final', {
+          opacity: 0, y: 44, duration: 0.95, ease: 'power3.out',
+          scrollTrigger: { trigger: '.cta-final', start: 'top 82%', once: true },
+        });
+
+      }
     </script>
   </body>
 </html>

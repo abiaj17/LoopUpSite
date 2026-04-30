@@ -4,99 +4,158 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>LoopUp Privacy Policy</title>
-    <meta
-      name="description"
-      content="LoopUp Privacy Policy describing what data we collect, how we use it, and user rights."
-    />
+    <meta name="description" content="LoopUp Privacy Policy describing what data we collect, how we use it, and user rights." />
     <link rel="canonical" href="https://loopup.app/privacy.html" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Nunito:wght@800;900&display=swap" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
     <script>
       tailwind.config = {
         theme: {
-          borderRadius: { none: "0", sm: "0.125rem", DEFAULT: "1rem", md: "1rem", lg: "1rem", xl: "1rem", "2xl": "1rem", full: "9999px" },
+          borderRadius: { none:"0",sm:"2px",DEFAULT:"12px",md:"12px",lg:"16px",xl:"20px","2xl":"24px",full:"9999px" },
           extend: {
-            fontFamily: { sans: ["SF Pro Display", "SF Pro Text", "Inter", "system-ui", "sans-serif"] },
-            colors: { ink: "#000000", paper: "#ffffff", system: "#f5f5f7", secondary: "#000000", line: "#d2d2d7", accent: "#ff2d55" }
+            fontFamily: { sans:["SF Pro Display","SF Pro Text","Inter","system-ui","sans-serif"] },
+            colors: { ink:"#1d1d1f",secondary:"#6e6e73",line:"#d2d2d7",system:"#f5f5f7",paper:"#ffffff",accent:"#ff5c47" }
           }
         }
       };
     </script>
     <style>
-      :root { --spring-ease: cubic-bezier(0.22, 1, 0.36, 1); --ui-med: 520ms; }
-      .glass { position: relative; overflow: hidden; background: linear-gradient(140deg, rgba(255,255,255,.7) 0%, rgba(255,255,255,.34) 48%, rgba(255,196,228,.2) 100%); border: 1px solid rgba(255,255,255,.62); backdrop-filter: blur(34px) saturate(180%) brightness(1.08); -webkit-backdrop-filter: blur(34px) saturate(180%) brightness(1.08); box-shadow: inset 0 1px 0 rgba(255,255,255,.96), inset 0 -1px 0 rgba(255,255,255,.36), 0 20px 45px rgba(255,45,85,.16), 0 35px 90px rgba(23,29,48,.16); }
-      .lift { transition: transform var(--ui-med) var(--spring-ease), box-shadow var(--ui-med) var(--spring-ease); }
-      .lift:hover { transform: translateY(-5px); box-shadow: 0 24px 50px rgba(0,0,0,.12); }
-      .logo-wordmark { font-size: 1.85rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1; background: linear-gradient(135deg, #ff2d55 0%, #ff7fb2 100%); color: transparent; background-clip: text; -webkit-background-clip: text; -webkit-text-stroke: 1px rgba(255, 45, 85, 0.32); }
-      .skip-link { position: absolute; left: 1rem; top: -3rem; z-index: 50; border-radius: 9999px; background: #ff2d55; color: #fff; padding: 0.5rem 0.9rem; font-size: 0.875rem; transition: top 250ms ease; }
-      .skip-link:focus { top: 1rem; }
-      a:focus-visible, button:focus-visible { outline: 2px solid rgba(255, 45, 85, 0.75); outline-offset: 3px; }
+      :root { --spring-ease:cubic-bezier(0.22,1,0.36,1); --ui-fast:200ms; }
+      html { scroll-behavior:smooth; }
+      .site-nav { background:rgba(255,255,255,0.82); backdrop-filter:saturate(180%) blur(20px); -webkit-backdrop-filter:saturate(180%) blur(20px); border-bottom:1px solid rgba(0,0,0,0.1); }
+      .logo-wordmark { font-family:'Nunito',system-ui,sans-serif; font-size:1.625rem; font-weight:900; letter-spacing:-0.01em; line-height:1; color:#ff5c47; text-decoration:none; position:relative; display:inline-block; }
+      .logo-wordmark::after { content:""; position:absolute; bottom:-3px; left:50%; transform:translateX(-50%); width:36%; height:2.5px; border-radius:9999px; background:#ff5c47; opacity:.5; }
+      .skip-link { position:absolute; left:1rem; top:-3rem; z-index:50; border-radius:9999px; background:#ff5c47; color:#fff; padding:.5rem .9rem; font-size:.875rem; transition:top 200ms ease; }
+      .skip-link:focus { top:1rem; }
+      a:focus-visible,button:focus-visible { outline:2px solid rgba(255,92,71,.7); outline-offset:3px; }
+      .reveal { opacity:0; transform:translate3d(0,28px,0); will-change:transform,opacity; transition:transform 750ms var(--spring-ease),opacity 750ms var(--spring-ease); transition-delay:var(--reveal-delay,0ms); }
+      .reveal.in { opacity:1; transform:translate3d(0,0,0); }
+      .btn-primary { position:relative; overflow:hidden; background:#ff5c47; color:#fff; border-radius:9999px; font-size:.9375rem; font-weight:600; padding:.75rem 1.625rem; display:inline-flex; align-items:center; gap:.625rem; transition:background var(--ui-fast) ease,box-shadow var(--ui-fast) ease,transform var(--ui-fast) ease; box-shadow:0 4px 18px rgba(255,92,71,.28); }
+      .btn-primary:hover { background:#f04f3a; box-shadow:0 8px 28px rgba(255,92,71,.36); transform:translateY(-1px); }
+      .btn-secondary { display:inline-flex; align-items:center; gap:.625rem; border-radius:9999px; border:1px solid rgba(0,0,0,.14); background:transparent; color:#1d1d1f; font-size:.9375rem; font-weight:600; padding:.75rem 1.625rem; transition:background var(--ui-fast) ease; }
+      .btn-secondary:hover { background:rgba(0,0,0,.04); }
+      @media (prefers-reduced-motion:reduce) { .reveal { transition:none!important; } }
+      html.low-motion .reveal { transition-duration:350ms!important; }
     </style>
   </head>
-  <body class="bg-gradient-to-b from-[#f2f3f7] via-[#f5f6fa] to-[#eef0f5] font-sans text-ink antialiased">
+  <body class="bg-white font-sans text-ink antialiased">
     <a href="#main-content" class="skip-link">Skip to content</a>
-    <header class="glass sticky top-0 z-20 border-b border-line bg-white/70 backdrop-blur-md">
-      <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+
+    <header class="site-nav sticky top-0 z-20">
+      <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-3.5">
         <a href="./index.html" class="logo-wordmark">LoopUp</a>
-        <nav class="flex items-center gap-6 text-sm text-secondary">
-          <a href="./index.html" class="haptic-tap rounded-full px-3 py-1.5 transition hover:bg-white hover:text-ink">Home</a>
-          <a href="./updates.html" class="haptic-tap rounded-full px-3 py-1.5 transition hover:bg-white hover:text-ink">Updates</a>
-          <a href="./about.html" class="haptic-tap rounded-full px-3 py-1.5 transition hover:bg-white hover:text-ink">About</a>
-          <a href="./contact.html" class="haptic-tap rounded-full px-3 py-1.5 transition hover:bg-white hover:text-ink">Contact</a>
-          <a href="./privacy.html" aria-current="page" class="haptic-tap rounded-full bg-white px-3 py-1.5 text-ink">Privacy</a>
+        <nav class="hidden items-center gap-0.5 text-sm md:flex" aria-label="Main">
+          <a href="./index.html" class="haptic-tap rounded-full px-3.5 py-1.5 font-medium text-secondary transition hover:bg-black/[0.05] hover:text-ink">Home</a>
+          <a href="./updates.html" class="haptic-tap rounded-full px-3.5 py-1.5 font-medium text-secondary transition hover:bg-black/[0.05] hover:text-ink">Updates</a>
+          <a href="./about.html" class="haptic-tap rounded-full px-3.5 py-1.5 font-medium text-secondary transition hover:bg-black/[0.05] hover:text-ink">About</a>
+          <a href="./contact.html" class="haptic-tap rounded-full px-3.5 py-1.5 font-medium text-secondary transition hover:bg-black/[0.05] hover:text-ink">Contact</a>
+          <a href="./privacy.html" aria-current="page" class="haptic-tap rounded-full px-3.5 py-1.5 font-medium text-ink transition hover:bg-black/[0.05]">Privacy</a>
         </nav>
+        <a href="#" class="haptic-tap btn-primary text-sm">Download</a>
       </div>
     </header>
-    <main id="main-content" class="mx-auto max-w-4xl px-6 py-16">
-      <section class="glass rounded-2xl p-8 md:p-10">
-        <p class="text-xs font-semibold uppercase tracking-[0.16em] text-secondary">Legal</p>
-        <h1 class="mt-2 text-4xl font-bold tracking-tight">Privacy Policy</h1>
-        <p class="mt-3 text-sm text-secondary">Effective date: April 29, 2026</p>
 
-        <div class="mt-8 space-y-6 text-sm leading-7 text-secondary">
-          <section>
-            <h2 class="text-lg font-semibold tracking-tight text-ink">What we collect</h2>
-            <p>LoopUp may collect account details, group/invite metadata, event content, media uploads, device identifiers, and limited analytics needed to operate and improve the service.</p>
-          </section>
-          <section>
-            <h2 class="text-lg font-semibold tracking-tight text-ink">How we use data</h2>
-            <p>We use data to deliver core features (Plan, Play, Share), protect account security, personalize reminders, maintain reliability, and communicate service updates.</p>
-          </section>
-          <section>
-            <h2 class="text-lg font-semibold tracking-tight text-ink">Sharing and storage</h2>
-            <p>We do not sell personal data. Data may be processed by trusted infrastructure providers strictly to run LoopUp. Retention periods depend on account activity and legal requirements.</p>
-          </section>
-          <section>
-            <h2 class="text-lg font-semibold tracking-tight text-ink">Your choices</h2>
-            <p>You can request access, correction, or deletion of eligible personal data and manage notification permissions from your device and account settings.</p>
-          </section>
-          <section>
-            <h2 class="text-lg font-semibold tracking-tight text-ink">Contact</h2>
-            <p>Questions about privacy: <a href="mailto:privacy@loopup.app" class="underline decoration-pink-300 underline-offset-4">privacy@loopup.app</a></p>
-          </section>
-        </div>
+    <main id="main-content">
 
-        <div class="mt-8 flex flex-wrap gap-3">
-          <button id="accept-policy" type="button" class="haptic-tap rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-white">Accept Privacy Policy</button>
-          <a href="./index.html" class="haptic-tap lift rounded-full border border-line bg-white px-5 py-2.5 text-sm font-semibold text-ink">Back to Home</a>
+      <!-- Hero -->
+      <section class="bg-white px-6 py-24 text-center md:py-32">
+        <div class="mx-auto max-w-3xl">
+          <p class="reveal mb-4 text-sm font-semibold tracking-wide text-[#ff5c47]">Legal</p>
+          <h1 class="reveal text-[2.75rem] font-extrabold leading-[1.05] tracking-[-0.04em] text-ink md:text-[4rem]">Privacy Policy</h1>
+          <p class="reveal mt-5 text-base text-secondary">Effective date: April 29, 2026</p>
         </div>
       </section>
+
+      <!-- Policy content -->
+      <section class="bg-system px-6 py-10 md:py-16">
+        <div class="mx-auto max-w-3xl">
+          <div class="reveal rounded-2xl bg-white p-8 shadow-sm md:p-12">
+
+            <div class="space-y-8 text-base leading-[1.75] text-secondary">
+
+              <div>
+                <h2 class="mb-3 text-lg font-semibold text-ink">What we collect</h2>
+                <p>LoopUp may collect account details, group and invite metadata, event content, media uploads, device identifiers, and limited analytics needed to operate and improve the service.</p>
+              </div>
+
+              <div class="border-t border-line pt-8">
+                <h2 class="mb-3 text-lg font-semibold text-ink">How we use data</h2>
+                <p>We use data to deliver core features (Plan, Play, Share), protect account security, personalize reminders, maintain reliability, and communicate service updates.</p>
+              </div>
+
+              <div class="border-t border-line pt-8">
+                <h2 class="mb-3 text-lg font-semibold text-ink">Sharing and storage</h2>
+                <p>We do not sell personal data. Data may be processed by trusted infrastructure providers strictly to run LoopUp. Retention periods depend on account activity and legal requirements.</p>
+              </div>
+
+              <div class="border-t border-line pt-8">
+                <h2 class="mb-3 text-lg font-semibold text-ink">Your choices</h2>
+                <p>You can request access, correction, or deletion of eligible personal data and manage notification permissions from your device and account settings.</p>
+              </div>
+
+              <div class="border-t border-line pt-8">
+                <h2 class="mb-3 text-lg font-semibold text-ink">Contact</h2>
+                <p>Questions about privacy: <a href="mailto:privacy@loopup.app" class="font-medium text-[#ff5c47] underline-offset-4 hover:underline">privacy@loopup.app</a></p>
+              </div>
+
+            </div>
+
+            <div class="mt-10 flex flex-wrap gap-3 border-t border-line pt-8">
+              <button id="accept-policy" type="button" class="haptic-tap btn-primary text-sm">Accept Privacy Policy</button>
+              <a href="./index.html" class="haptic-tap btn-secondary text-sm">Back to Home</a>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
     </main>
+
+    <footer class="border-t border-line bg-system">
+      <div class="mx-auto max-w-6xl px-6 py-12">
+        <div class="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
+          <a href="./index.html" class="logo-wordmark" style="font-size:1.375rem;">LoopUp</a>
+          <div class="flex flex-wrap gap-5 text-sm text-secondary">
+            <a href="./updates.html" class="haptic-tap transition hover:text-ink">Updates</a>
+            <a href="./about.html" class="haptic-tap transition hover:text-ink">About</a>
+            <a href="./contact.html" class="haptic-tap transition hover:text-ink">Contact</a>
+            <a href="./privacy.html" class="haptic-tap transition hover:text-ink">Privacy</a>
+          </div>
+        </div>
+        <div class="mt-8 border-t border-line pt-6">
+          <p class="text-xs text-secondary">© <span id="year"></span> LoopUp. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
     <script>
-      const canUseHaptics = "vibrate" in navigator && window.matchMedia("(pointer: coarse)").matches;
-      const triggerHapticTap = (pattern = [8]) => {
-        if (!canUseHaptics) return;
-        navigator.vibrate(pattern);
-      };
-      document.querySelectorAll(".haptic-tap").forEach((element) => {
-        element.addEventListener("pointerup", () => triggerHapticTap([8]));
-      });
-      document.getElementById("accept-policy")?.addEventListener("click", () => {
-        localStorage.setItem("loopup_policy_accepted_v1", "true");
-        triggerHapticTap([10]);
-      });
+      document.getElementById("year").textContent=new Date().getFullYear();
+      const canVibrate="vibrate" in navigator&&window.matchMedia("(pointer: coarse)").matches;
+      const hap=(p=[8])=>{if(canVibrate)navigator.vibrate(p);};
+      document.querySelectorAll(".haptic-tap").forEach(el=>{el.addEventListener("pointerup",()=>hap());});
+      document.getElementById("accept-policy")?.addEventListener("click",()=>{localStorage.setItem("loopup_policy_accepted_v1","true");hap([10]);});
+
+      // ─── Lenis + GSAP ScrollTrigger ──────────────────────────────────────
+      gsap.registerPlugin(ScrollTrigger);
+      const lenis=new Lenis({duration:1.25,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)),smoothTouch:false});
+      lenis.on('scroll',ScrollTrigger.update);
+      gsap.ticker.add(time=>lenis.raf(time*1000));
+      gsap.ticker.lagSmoothing(0);
+      if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+        gsap.utils.toArray('.reveal').forEach(el=>{
+          gsap.from(el,{opacity:0,y:36,duration:0.85,ease:'power3.out',
+            clearProps:'transform',
+            scrollTrigger:{trigger:el,start:'top 84%',once:true}});
+        });
+        ScrollTrigger.refresh();
+      }else{
+        document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in'));
+      }
     </script>
   </body>
 </html>

@@ -4,189 +4,180 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contact LoopUp | Support and Feedback</title>
-    <meta
-      name="description"
-      content="Contact the LoopUp team for support, partnership requests, and product feedback."
-    />
+    <meta name="description" content="Contact the LoopUp team for support, partnership requests, and product feedback." />
     <link rel="canonical" href="https://loopup.app/contact.html" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Nunito:wght@800;900&display=swap" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
     <script>
       tailwind.config = {
         theme: {
-          borderRadius: { none: "0", sm: "0.125rem", DEFAULT: "1rem", md: "1rem", lg: "1rem", xl: "1rem", "2xl": "1rem", full: "9999px" },
+          borderRadius: { none:"0",sm:"2px",DEFAULT:"12px",md:"12px",lg:"16px",xl:"20px","2xl":"24px",full:"9999px" },
           extend: {
-            fontFamily: { sans: ["SF Pro Display", "SF Pro Text", "Inter", "system-ui", "sans-serif"] },
-            colors: { ink: "#000000", paper: "#ffffff", system: "#f5f5f7", secondary: "#000000", line: "#d2d2d7", accent: "#ff2d55" }
+            fontFamily: { sans:["SF Pro Display","SF Pro Text","Inter","system-ui","sans-serif"] },
+            colors: { ink:"#1d1d1f",secondary:"#6e6e73",line:"#d2d2d7",system:"#f5f5f7",paper:"#ffffff",accent:"#ff5c47" }
           }
         }
       };
     </script>
     <style>
-      :root { --spring-ease: cubic-bezier(0.22, 1, 0.36, 1); --ui-fast: 220ms; --ui-med: 520ms; }
-      html { scroll-behavior: smooth; }
-      .glass { position: relative; overflow: hidden; background: linear-gradient(140deg, rgba(255,255,255,.7) 0%, rgba(255,255,255,.34) 48%, rgba(255,196,228,.2) 100%); border: 1px solid rgba(255,255,255,.62); backdrop-filter: blur(34px) saturate(180%) brightness(1.08); -webkit-backdrop-filter: blur(34px) saturate(180%) brightness(1.08); box-shadow: inset 0 1px 0 rgba(255,255,255,.96), inset 0 -1px 0 rgba(255,255,255,.36), 0 20px 45px rgba(255,45,85,.16), 0 35px 90px rgba(23,29,48,.16); }
-      .glass::before { content:""; position:absolute; inset:0; background: radial-gradient(circle at 18% 12%, rgba(255,255,255,.82) 0%, rgba(255,255,255,0) 38%), radial-gradient(circle at 82% 82%, rgba(255,140,190,.32) 0%, rgba(255,140,190,0) 44%), linear-gradient(120deg, rgba(255,255,255,0) 20%, rgba(255,255,255,.42) 48%, rgba(255,255,255,0) 76%); background-size: 100% 100%, 100% 100%, 240% 240%; animation: sheenMove 7s linear infinite; pointer-events:none; }
-      .glass::after { content:""; position:absolute; inset:1px; border-radius:inherit; border: 1px solid rgba(255,255,255,.5); background: linear-gradient(180deg, rgba(255,255,255,.2), rgba(255,255,255,0)); mix-blend-mode: screen; pointer-events:none; }
-      .lift { transform: perspective(1100px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translate3d(0,0,0); will-change: transform, box-shadow; backface-visibility: hidden; transition: transform var(--ui-med) var(--spring-ease), box-shadow var(--ui-med) var(--spring-ease), border-color var(--ui-med) var(--spring-ease); }
-      .lift:hover { transform: perspective(1100px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translate3d(0,-8px,0) scale(1.015); box-shadow: 0 26px 62px rgba(0,0,0,.14); border-color: rgba(255,45,85,.35); }
-      @keyframes sheenMove { 0% { background-position: 0% 0%, 0% 0%, 0% 50%; } 100% { background-position: 0% 0%, 0% 0%, 100% 50%; } }
-      .reveal { opacity: 0; transform: translate3d(0,20px,0); will-change: transform, opacity; transition: transform 950ms var(--spring-ease), opacity 950ms var(--spring-ease); transition-delay: var(--reveal-delay, 0ms); }
-      .reveal.in { opacity: 1; transform: translate3d(0,0,0); }
-      .logo-wordmark { font-size: 1.85rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1; background: linear-gradient(135deg, #ff2d55 0%, #ff7fb2 100%); color: transparent; background-clip: text; -webkit-background-clip: text; -webkit-text-stroke: 1px rgba(255, 45, 85, 0.32); text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7), 0 10px 24px rgba(255, 45, 85, 0.18); }
-      .mesh-overlay { position: fixed; inset: 0; z-index: 0; pointer-events: none; background-image: radial-gradient(rgba(255, 255, 255, 0.2) 0.7px, transparent 0.7px); background-size: 3px 3px; opacity: 0.18; mix-blend-mode: soft-light; }
-      .policy-backdrop { position: fixed; inset: 0; z-index: 60; display: none; align-items: center; justify-content: center; padding: 1rem; background: rgba(9, 10, 14, 0.58); backdrop-filter: blur(6px); }
-      .policy-backdrop.active { display: flex; }
-      .policy-card { width: min(100%, 34rem); }
-      html.low-motion .glass { backdrop-filter: blur(22px) saturate(150%) brightness(1.02); -webkit-backdrop-filter: blur(22px) saturate(150%) brightness(1.02); }
-      html.low-motion .glass::before { animation-duration: 14s; opacity: 0.72; }
-      html.low-motion .mesh-overlay { opacity: 0.1; }
-      html.low-motion .lift, html.low-motion .reveal { transition-duration: 360ms !important; }
-      .skip-link { position: absolute; left: 1rem; top: -3rem; z-index: 50; border-radius: 9999px; background: #ff2d55; color: #fff; padding: 0.5rem 0.9rem; font-size: 0.875rem; transition: top 250ms ease; }
-      .skip-link:focus { top: 1rem; }
-      a:focus-visible { outline: 2px solid rgba(255, 45, 85, 0.75); outline-offset: 3px; }
-      @media (prefers-reduced-motion: reduce) { .lift, .reveal { transition: none !important; } .glass::before { animation: none !important; } .lift:hover { transform: none; } }
+      :root { --spring-ease:cubic-bezier(0.22,1,0.36,1); --ui-fast:200ms; --ui-med:480ms; }
+      /* scroll-behavior handled by Lenis */
+      .site-nav { background:rgba(255,255,255,0.82); backdrop-filter:saturate(180%) blur(20px); -webkit-backdrop-filter:saturate(180%) blur(20px); border-bottom:1px solid rgba(0,0,0,0.1); }
+      .logo-wordmark { font-family:'Nunito',system-ui,sans-serif; font-size:1.625rem; font-weight:900; letter-spacing:-0.01em; line-height:1; color:#ff5c47; text-decoration:none; position:relative; display:inline-block; }
+      .logo-wordmark::after { content:""; position:absolute; bottom:-3px; left:50%; transform:translateX(-50%); width:36%; height:2.5px; border-radius:9999px; background:#ff5c47; opacity:.5; }
+      .skip-link { position:absolute; left:1rem; top:-3rem; z-index:50; border-radius:9999px; background:#ff5c47; color:#fff; padding:.5rem .9rem; font-size:.875rem; transition:top 200ms ease; }
+      .skip-link:focus { top:1rem; }
+      a:focus-visible { outline:2px solid rgba(255,92,71,.7); outline-offset:3px; }
+      .reveal { opacity:0; transform:translate3d(0,28px,0); will-change:transform,opacity; transition:transform 750ms var(--spring-ease),opacity 750ms var(--spring-ease); transition-delay:var(--reveal-delay,0ms); }
+      .reveal.in { opacity:1; transform:translate3d(0,0,0); }
+      .feature-card { background:#fff; border:1px solid rgba(0,0,0,.06); transition:box-shadow var(--ui-med) var(--spring-ease),transform var(--ui-med) var(--spring-ease); }
+      .feature-card:hover { box-shadow:0 12px 40px rgba(0,0,0,.08); transform:translateY(-3px); }
+      .btn-primary { position:relative; overflow:hidden; background:#ff5c47; color:#fff; border-radius:9999px; font-size:.9375rem; font-weight:600; padding:.75rem 1.625rem; display:inline-flex; align-items:center; gap:.625rem; transition:background var(--ui-fast) ease,box-shadow var(--ui-fast) ease,transform var(--ui-fast) ease; box-shadow:0 4px 18px rgba(255,92,71,.28); }
+      .btn-primary:hover { background:#f04f3a; box-shadow:0 8px 28px rgba(255,92,71,.36); transform:translateY(-1px); }
+      .btn-secondary { display:inline-flex; align-items:center; gap:.625rem; border-radius:9999px; border:1px solid rgba(0,0,0,.14); background:transparent; color:#1d1d1f; font-size:.9375rem; font-weight:600; padding:.75rem 1.625rem; transition:background var(--ui-fast) ease; }
+      .btn-secondary:hover { background:rgba(0,0,0,.04); }
+      .policy-backdrop { position:fixed; inset:0; z-index:60; display:none; align-items:center; justify-content:center; padding:1rem; background:rgba(0,0,0,.48); backdrop-filter:blur(10px); }
+      .policy-backdrop.active { display:flex; }
+      .policy-card { width:min(100%,34rem); }
+      @media (prefers-reduced-motion:reduce) { .reveal { transition:none!important; } .feature-card:hover { transform:none; } }
+      html.low-motion .reveal { transition-duration:350ms!important; }
     </style>
   </head>
-  <body class="bg-gradient-to-b from-[#f2f3f7] via-[#f5f6fa] to-[#eef0f5] font-sans text-ink antialiased">
+  <body class="bg-white font-sans text-ink antialiased">
     <a href="#main-content" class="skip-link">Skip to content</a>
-    <div class="mesh-overlay"></div>
-    <div class="pointer-events-none fixed inset-x-0 top-0 z-0 mx-auto h-72 max-w-6xl bg-gradient-to-b from-white/65 via-white/20 to-transparent blur-3xl"></div>
-    <div class="pointer-events-none fixed -left-24 top-20 z-0 h-80 w-80 rounded-full bg-pink-300/30 blur-3xl"></div>
-    <div class="pointer-events-none fixed -right-24 top-44 z-0 h-96 w-96 rounded-full bg-rose-300/30 blur-3xl"></div>
-    <header class="glass sticky top-0 z-20 border-b border-line bg-white/70 backdrop-blur-md">
-      <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+
+    <header class="site-nav sticky top-0 z-20">
+      <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-3.5">
         <a href="./index.html" class="logo-wordmark">LoopUp</a>
-        <nav class="flex items-center gap-6 text-sm text-secondary">
-          <a href="./index.html" class="haptic-tap rounded-full px-3 py-1.5 transition hover:bg-white hover:text-ink">Home</a>
-          <a href="./updates.html" class="haptic-tap rounded-full px-3 py-1.5 transition hover:bg-white hover:text-ink">Updates</a>
-          <a href="./about.html" class="haptic-tap rounded-full px-3 py-1.5 transition hover:bg-white hover:text-ink">About</a>
-          <a href="./contact.html" aria-current="page" class="haptic-tap rounded-full bg-white px-3 py-1.5 text-ink">Contact</a>
+        <nav class="hidden items-center gap-0.5 text-sm md:flex" aria-label="Main">
+          <a href="./index.html" class="haptic-tap rounded-full px-3.5 py-1.5 font-medium text-secondary transition hover:bg-black/[0.05] hover:text-ink">Home</a>
+          <a href="./updates.html" class="haptic-tap rounded-full px-3.5 py-1.5 font-medium text-secondary transition hover:bg-black/[0.05] hover:text-ink">Updates</a>
+          <a href="./about.html" class="haptic-tap rounded-full px-3.5 py-1.5 font-medium text-secondary transition hover:bg-black/[0.05] hover:text-ink">About</a>
+          <a href="./contact.html" aria-current="page" class="haptic-tap rounded-full px-3.5 py-1.5 font-medium text-ink transition hover:bg-black/[0.05]">Contact</a>
         </nav>
+        <a href="#" class="haptic-tap btn-primary text-sm">Download</a>
       </div>
     </header>
-    <main id="main-content" class="relative z-10 mx-auto max-w-6xl px-6 py-24">
-      <section class="reveal">
-        <h1 class="text-4xl font-bold tracking-tight md:text-6xl">Contact</h1>
-        <p class="mt-6 max-w-2xl text-lg text-secondary">Questions, support, feedback, or partnerships.</p>
+
+    <main id="main-content">
+
+      <!-- Hero -->
+      <section class="bg-white px-6 py-28 text-center md:py-36">
+        <div class="mx-auto max-w-4xl">
+          <p class="reveal mb-4 text-sm font-semibold tracking-wide text-[#ff5c47]">Contact</p>
+          <h1 class="reveal text-[3rem] font-extrabold leading-[1.05] tracking-[-0.04em] text-ink md:text-[4.5rem]">Get in touch.</h1>
+          <p class="reveal mx-auto mt-7 max-w-xl text-xl leading-relaxed text-secondary">Questions, support, feedback, or partnerships — we'd love to hear from you.</p>
+        </div>
       </section>
-      <section class="mt-10 grid gap-6 md:grid-cols-2 reveal">
-        <article class="glass lift rounded-2xl p-8">
-          <h2 class="text-2xl font-bold tracking-tight">Support</h2>
-          <p class="mt-3 text-secondary">Email us for app support and account issues.</p>
-          <a href="mailto:support@loopup.app" class="haptic-tap mt-5 inline-flex rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-white">support@loopup.app</a>
-        </article>
-        <article class="glass lift rounded-2xl p-8">
-          <h2 class="text-2xl font-bold tracking-tight">Product feedback</h2>
-          <p class="mt-3 text-secondary">Share ideas and feature requests with the team.</p>
-          <a href="mailto:hello@loopup.app" class="haptic-tap mt-5 inline-flex rounded-full border border-pink-200/70 bg-pink-50/70 px-5 py-2.5 text-sm font-semibold text-ink">hello@loopup.app</a>
-        </article>
+
+      <!-- Contact cards -->
+      <section class="bg-system px-6 py-20 md:py-28">
+        <div class="mx-auto grid max-w-6xl gap-5 md:grid-cols-2">
+
+          <article class="reveal feature-card rounded-2xl p-10">
+            <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-[#fff0ee]">
+              <svg class="h-6 w-6 text-[#ff5c47]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+            </div>
+            <h2 class="text-2xl font-bold tracking-tight text-ink">Support</h2>
+            <p class="mt-3 text-base leading-relaxed text-secondary">Email us for app support, account issues, or anything that isn't working as expected.</p>
+            <div class="mt-8">
+              <a href="mailto:support@loopup.app" class="haptic-tap btn-primary text-sm">support@loopup.app</a>
+            </div>
+          </article>
+
+          <article class="reveal feature-card rounded-2xl p-10">
+            <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-system">
+              <svg class="h-6 w-6 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <h2 class="text-2xl font-bold tracking-tight text-ink">Product feedback</h2>
+            <p class="mt-3 text-base leading-relaxed text-secondary">Share ideas, feature requests, or tell us what you love. We read every message carefully.</p>
+            <div class="mt-8">
+              <a href="mailto:hello@loopup.app" class="haptic-tap btn-secondary text-sm">hello@loopup.app</a>
+            </div>
+          </article>
+
+        </div>
       </section>
+
+      <!-- Partnerships -->
+      <section class="bg-white px-6 py-20 md:py-28">
+        <div class="mx-auto max-w-2xl text-center">
+          <div class="reveal">
+            <p class="text-sm font-semibold tracking-wide text-[#ff5c47]">Partnerships</p>
+            <h2 class="mt-4 text-3xl font-bold tracking-[-0.03em] text-ink md:text-[2.5rem]">Want to work together?</h2>
+            <p class="mx-auto mt-4 max-w-md text-lg text-secondary">Reach out to discuss brand partnerships, integrations, or media inquiries.</p>
+            <div class="mt-8">
+              <a href="mailto:hello@loopup.app" class="haptic-tap btn-secondary text-base" style="padding:.875rem 2rem;">hello@loopup.app</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
     </main>
-    <footer class="mx-auto flex max-w-6xl flex-col gap-4 px-6 py-10 text-sm text-secondary md:flex-row md:items-center md:justify-between">
-      <p>© <span id="year"></span> LoopUp. All rights reserved.</p>
-      <div class="flex gap-4">
-        <a href="./updates.html" class="haptic-tap hover:text-ink">Updates</a>
-        <a href="./about.html" class="haptic-tap hover:text-ink">About</a>
-        <a href="./contact.html" class="haptic-tap hover:text-ink">Contact</a>
-        <a href="./privacy.html" class="haptic-tap hover:text-ink">Privacy</a>
+
+    <footer class="border-t border-line bg-system">
+      <div class="mx-auto max-w-6xl px-6 py-12">
+        <div class="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
+          <a href="./index.html" class="logo-wordmark" style="font-size:1.375rem;">LoopUp</a>
+          <div class="flex flex-wrap gap-5 text-sm text-secondary">
+            <a href="./updates.html" class="haptic-tap transition hover:text-ink">Updates</a>
+            <a href="./about.html" class="haptic-tap transition hover:text-ink">About</a>
+            <a href="./contact.html" class="haptic-tap transition hover:text-ink">Contact</a>
+            <a href="./privacy.html" class="haptic-tap transition hover:text-ink">Privacy</a>
+          </div>
+        </div>
+        <div class="mt-8 border-t border-line pt-6">
+          <p class="text-xs text-secondary">© <span id="year"></span> LoopUp. All rights reserved.</p>
+        </div>
       </div>
     </footer>
+
     <div id="policy-consent" class="policy-backdrop" role="dialog" aria-modal="true" aria-labelledby="policy-title">
-      <div class="policy-card glass rounded-2xl p-6">
+      <div class="policy-card rounded-2xl bg-white p-6 shadow-2xl">
         <p class="text-xs font-semibold uppercase tracking-[0.16em] text-secondary">Privacy Required</p>
-        <h2 id="policy-title" class="mt-2 text-2xl font-bold tracking-tight text-ink">Before you continue</h2>
-        <p class="mt-3 text-sm text-secondary">Please review and accept the LoopUp Privacy Policy to continue using this website experience.</p>
+        <h2 id="policy-title" class="mt-2 text-xl font-bold text-ink">Before you continue</h2>
+        <p class="mt-3 text-sm text-secondary">Please review and accept the LoopUp Privacy Policy to continue.</p>
         <div class="mt-5 flex flex-wrap gap-3">
-          <a href="./privacy.html" class="haptic-tap glass-soft rounded-full px-4 py-2 text-sm font-semibold text-ink">View Privacy Policy</a>
-          <button id="accept-policy" type="button" class="haptic-tap rounded-full bg-accent px-4 py-2 text-sm font-semibold text-white">I Accept</button>
+          <a href="./privacy.html" class="haptic-tap rounded-full border border-line bg-system px-4 py-2 text-sm font-semibold text-ink transition hover:bg-line">View Privacy Policy</a>
+          <button id="accept-policy" type="button" class="haptic-tap btn-primary text-sm" style="padding:.5rem 1.125rem;">I Accept</button>
         </div>
       </div>
     </div>
+
     <script>
-      const isLowPowerDevice =
-        (typeof navigator.hardwareConcurrency === "number" && navigator.hardwareConcurrency <= 4) ||
-        (typeof navigator.deviceMemory === "number" && navigator.deviceMemory <= 4);
-      if (isLowPowerDevice) {
-        document.documentElement.classList.add("low-motion");
-      }
-      document.getElementById("year").textContent = new Date().getFullYear();
-      const revealElements = document.querySelectorAll(".reveal");
-      revealElements.forEach((element, index) => {
-        element.style.setProperty("--reveal-delay", `${index * 90}ms`);
-      });
-      if ("IntersectionObserver" in window) {
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("in");
-              observer.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.15, rootMargin: "0px 0px -10% 0px" });
-        revealElements.forEach((element) => observer.observe(element));
-      } else {
-        revealElements.forEach((element) => element.classList.add("in"));
-      }
-      const prefersFinePointer = window.matchMedia("(pointer: fine)").matches;
-      if (prefersFinePointer && !isLowPowerDevice) {
-        const liftElements = document.querySelectorAll(".lift");
-        liftElements.forEach((element) => {
-          let rafId = null;
-          let targetX = 0;
-          let targetY = 0;
-          element.addEventListener("pointermove", (event) => {
-            const rect = element.getBoundingClientRect();
-            targetX = (event.clientX - rect.left) / rect.width - 0.5;
-            targetY = (event.clientY - rect.top) / rect.height - 0.5;
-            if (rafId) return;
-            rafId = requestAnimationFrame(() => {
-              element.style.setProperty("--ry", `${targetX * 7}deg`);
-              element.style.setProperty("--rx", `${-targetY * 7}deg`);
-              rafId = null;
-            });
-          });
-          element.addEventListener("pointerleave", () => {
-            if (rafId) cancelAnimationFrame(rafId);
-            rafId = null;
-            element.style.setProperty("--ry", "0deg");
-            element.style.setProperty("--rx", "0deg");
-          });
+      const isLowPowerDevice=(typeof navigator.hardwareConcurrency==="number"&&navigator.hardwareConcurrency<=4)||(typeof navigator.deviceMemory==="number"&&navigator.deviceMemory<=4);
+      if(isLowPowerDevice)document.documentElement.classList.add("low-motion");
+      document.getElementById("year").textContent=new Date().getFullYear();
+      const canVibrate="vibrate" in navigator&&window.matchMedia("(pointer: coarse)").matches;
+      const hap=(p=[8])=>{if(canVibrate)navigator.vibrate(p);};
+      document.querySelectorAll(".haptic-tap").forEach(el=>{el.addEventListener("pointerup",()=>hap());el.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" ")hap([6]);});});
+      const key="loopup_policy_accepted_v1";
+      const consent=document.getElementById("policy-consent");
+      const btn=document.getElementById("accept-policy");
+      if(localStorage.getItem(key)!=="true"){consent.classList.add("active");document.body.style.overflow="hidden";}
+      btn?.addEventListener("click",()=>{localStorage.setItem(key,"true");consent.classList.remove("active");document.body.style.overflow="";hap([10]);});
+
+      // ─── Lenis + GSAP ScrollTrigger ──────────────────────────────────────
+      gsap.registerPlugin(ScrollTrigger);
+      const lenis=new Lenis({duration:1.25,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)),smoothTouch:false});
+      lenis.on('scroll',ScrollTrigger.update);
+      gsap.ticker.add(time=>lenis.raf(time*1000));
+      gsap.ticker.lagSmoothing(0);
+      if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches&&!isLowPowerDevice){
+        gsap.utils.toArray('.reveal').forEach(el=>{
+          gsap.from(el,{opacity:0,y:36,duration:0.85,ease:'power3.out',
+            clearProps:'transform',
+            scrollTrigger:{trigger:el,start:'top 84%',once:true}});
         });
+        ScrollTrigger.refresh();
+      }else{
+        document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in'));
       }
-      const canUseHaptics = "vibrate" in navigator && window.matchMedia("(pointer: coarse)").matches;
-      const triggerHapticTap = (pattern = [8]) => {
-        if (!canUseHaptics) return;
-        navigator.vibrate(pattern);
-      };
-      document.querySelectorAll(".haptic-tap").forEach((element) => {
-        element.addEventListener("pointerup", () => triggerHapticTap([8]));
-        element.addEventListener("keydown", (event) => {
-          if (event.key === "Enter" || event.key === " ") {
-            triggerHapticTap([6]);
-          }
-        });
-      });
-      const policyStorageKey = "loopup_policy_accepted_v1";
-      const policyConsent = document.getElementById("policy-consent");
-      const acceptPolicyButton = document.getElementById("accept-policy");
-      const hasAcceptedPolicy = localStorage.getItem(policyStorageKey) === "true";
-      if (!hasAcceptedPolicy) {
-        policyConsent.classList.add("active");
-        document.body.style.overflow = "hidden";
-      }
-      acceptPolicyButton?.addEventListener("click", () => {
-        localStorage.setItem(policyStorageKey, "true");
-        policyConsent.classList.remove("active");
-        document.body.style.overflow = "";
-        triggerHapticTap([10]);
-      });
     </script>
   </body>
 </html>
-
-
-
-
